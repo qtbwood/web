@@ -43,4 +43,50 @@ document.addEventListener("DOMContentLoaded", function() {
     // 2. 設定計時器，每 5 秒 (5000 毫秒) 執行一次
     setInterval(updateCarousel, 5000);
 
+    // --- 導覽列互動效果 ---
+    const navLinks = document.querySelectorAll('.site-navigation a');
+    const sections = document.querySelectorAll('main > .intro-text, main > .showcase');
+
+    function updateActiveNavLink() {
+        let currentSectionId = 'home'; 
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) { // 減去 150px 作為偏移量
+                currentSectionId = section.id;
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNavLink);
+    updateActiveNavLink(); // 初始載入時執行一次
+
+    // --- 區塊進場動畫 ---
+    const showcaseElements = document.querySelectorAll('.showcase');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    showcaseElements.forEach(el => {
+        observer.observe(el);
+    });
 });
