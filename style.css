@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display.swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
 /* --- 基本重置與設定 --- */
 :root {
@@ -115,9 +115,6 @@ a:hover {
 .hero-section {
     padding: 2rem 0;
     background-color: var(--bg-color);
-    /* * 移除 flex 置中，
-     * .hero-carousel 和 .carousel-pagination 會自然垂直排列
-     */
 }
 
 .hero-carousel {
@@ -221,7 +218,8 @@ a:hover {
 }
 .two-column .image-content img {
     border-radius: 5px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* *** 新增：與地圖統一的陰影 (立體感) *** */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 /* 圖片在右邊 */
 .two-column.reverse {
@@ -248,6 +246,9 @@ a:hover {
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 5px;
+
+    /* *** 新增：只在地圖上加入更明顯的陰影 (立體感) *** */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 .map-placeholder iframe {
     width: 100%;
@@ -401,12 +402,6 @@ a:hover {
 
 /* --- *** 新的分段指示器樣式 (位於圖片下方) *** --- */
 .carousel-pagination {
-    /* *** 修正：移除 absolute 定位 *** */
-    /* position: absolute; */
-    /* bottom: 20px; */
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
-    
     /* *** 新增：改為 flex 置中 *** */
     display: flex;
     justify-content: center;
