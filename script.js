@@ -1,45 +1,30 @@
-// script.js (混合版)
+// script.js (全新輪播版)
 
 document.addEventListener("DOMContentLoaded", function() {
     
-    // --- 1. 英雄輪播 (*** 使用您原版的 3D 邏輯 ***) ---
-    const layers = document.querySelectorAll('.hero-collage .image-layer');
-    const totalLayers = layers.length;
-    
-    if (totalLayers >= 3) {
-        let currentIndex = 0; // 目前顯示在最前面的圖片索引
+    // --- 1. 英雄輪播 (*** 全新重製版：淡入淡出 ***) ---
+    const slides = document.querySelectorAll('.hero-carousel .slide');
+    const totalSlides = slides.length;
+    let currentSlideIndex = 0;
 
-        function updateCarousel() {
-            // 1. 計算 '上一個' 和 '下一個' 的索引
-            const prevIndex = (currentIndex - 1 + totalLayers) % totalLayers;
-            const nextIndex = (currentIndex + 1) % totalLayers;
-
-            // 2. 移除所有圖層上的所有角色
-            layers.forEach(layer => {
-                layer.classList.remove('active', 'prev', 'next');
-            });
-
-            // 3. 根據計算好的索引，重新賦予角色
-            layers[prevIndex].classList.add('prev');
-            layers[currentIndex].classList.add('active');
-            layers[nextIndex].classList.add('next');
-
-            // 4. 更新下一次的索引 (準備下一次輪播)
-            currentIndex = (currentIndex + 1) % totalLayers;
+    if (totalSlides > 1) {
+        function showNextSlide() {
+            // 隱藏目前這張
+            slides[currentSlideIndex].classList.remove('active');
+            
+            // 計算下一張 (索引 + 1，然後取餘數)
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            
+            // 顯示下一張
+            slides[currentSlideIndex].classList.add('active');
         }
 
-        // 1. 立即執行一次，設定初始狀態
-        updateCarousel();
-
-        // 2. 設定計時器，每 5 秒 (5000 毫秒) 執行一次
-        setInterval(updateCarousel, 5000);
-    
-    } else if (totalLayers > 0) {
-        // 如果圖層少於 3 個，這個動畫沒意義，只顯示第一張
-        layers[0].classList.add('active');
+        // 設定計時器，每 5 秒 (5000 毫秒) 執行一次
+        setInterval(showNextSlide, 5000);
     }
+    // (如果只有一張圖片，它會保持 HTML 上的 .active，不執行 JS)
 
-    // --- 2. 導覽列滾動高亮 (保留我的邏輯) ---
+    // --- 2. 導覽列滾動高亮 (維持不變) ---
     const navLinks = document.querySelectorAll('.site-navigation a');
     // 選擇 main 底下的 section (*** 注意：我們排除了 hero-section ***)
     const sections = document.querySelectorAll('main > .content-section'); 
@@ -72,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('scroll', updateActiveNavLink);
     updateActiveNavLink(); // 初始載入時執行一次
 
-    // --- 3. 區塊進場動畫 (保留我的邏輯) ---
+    // --- 3. 區塊進場動畫 (維持不變) ---
     // (*** 注意：我們排除了 hero-section ***)
     const animatedElements = document.querySelectorAll('.content-section'); 
 
