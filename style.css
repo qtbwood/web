@@ -318,7 +318,7 @@ a:hover {
 
 
 /* --- 響應式設計 (RWD) --- */
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 500px) {
     /* (RWD 區塊) */
     .site-identifier {
         position: static; 
@@ -421,3 +421,4 @@ a:hover {
         gap: 20px;
     }
 }
+
