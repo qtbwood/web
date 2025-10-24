@@ -111,74 +111,65 @@ a:hover {
     background-color: var(--accent-color-blue);
 }
 
-/* --- 2. 英雄輪播 (*** 使用您原版的 3D 樣式 ***) --- */
+/* --- 2. 英雄輪播 (*** 全新重製版 ***) --- */
 .hero-section {
     padding: 2rem 0;
     background-color: var(--bg-color);
-    /* * *** 修正：移除了 display: flex 和 align-items: center ***
-     * 這兩行導致 .hero-section 的高度計算錯誤，
-     * 造成它與下方的 "關於我們" 區塊重疊。
-     * 移除後，.hero-section 的高度將會
-     * 自動被內部的 .hero-collage (60vh) 撐開。
-     */
-    /* display: flex; */
-    /* align-items: center; */
-    max-height: 900px; /* 保留最大高度作為安全裝置 */
+    /* 讓 .hero-carousel 容器置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-.hero-collage {
+.hero-carousel {
     position: relative;
-    height: 60vh; /* 來自您原版的 CSS */
-    min-height: 500px; /* 確保最小高度 */
-    perspective: 1200px; 
     width: 100%;
+    max-width: 1100px; /* 限制最大寬度 */
+    
+    /* * 設定一個固定的高寬比 (例如 4:3 或 16:9) 
+     * 這會自動撐開 .hero-section 的高度，解決重疊問題
+     */
+    aspect-ratio: 4 / 3;
+    max-height: 70vh; /* 最大高度不超過螢幕 70% */
+    
+    overflow: hidden; /* 確保內容不溢出 */
+    background-color: #EFEBE9; /* 圖片載入時的淺底色 */
 }
-.image-layer {
+
+.hero-carousel .slide {
     position: absolute;
-    width: 70%; 
-    aspect-ratio: 550 / 733; /* 來自您原版的 CSS */
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transition: transform 1.2s cubic-bezier(0.45, 0, 0.55, 1),
-                opacity 0.8s ease-in-out,
-                z-index 0s 0.6s;
-    cursor: pointer;
-    transform: translateX(0) scale(0.7);
-    opacity: 0;
-    z-index: 1;
-    /* 水平置中 */
-    left: 15%; 
-}
-.image-layer.active {
-    transform: translateX(15%) translateY(5%) scale(1) translateZ(100px);
-    opacity: 1;
-    z-index: 10;
-}
-.image-layer.next {
-    transform: translateX(60%) translateY(15%) scale(0.8) translateZ(-50px);
-    opacity: 0.5;
-    z-index: 5;
-}
-.image-layer.prev {
-    transform: translateX(-30%) translateY(15%) scale(0.8) translateZ(-50px);
-    opacity: 0.5;
-    z-index: 5;
-}
-.image-layer img {
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    /* * *** 關鍵修改：使用 contain ***
-     * 這會確保圖片完整顯示，不會被裁切 
+    
+    /* 淡入淡出效果 */
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    
+    /* (關鍵) 讓圖片在 slide 內置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-carousel .slide.active {
+    opacity: 1; /* 顯示當前圖片 */
+    z-index: 1; /* 確保在最上層 */
+}
+
+.hero-carousel .slide img {
+    width: 100%;
+    height: 100%;
+    
+    /* * (關鍵) 確保圖片完整顯示，絕不裁切 
+     * 圖片會自動縮放以適應容器
      */
     object-fit: contain; 
-    background-color: transparent; 
-    border: none;
-    box-sizing: border-box; 
 }
 
 
-/* --- 3-6. 內容區塊 --- */
+/* --- 3-6. 內容區塊 (維持不變) --- */
 .content-section {
     padding: 4rem 0;
     /* 這是您原本的進場動畫 */
@@ -240,8 +231,6 @@ a:hover {
 }
 /* 圖片在右邊 */
 .two-column.reverse {
-    /* 透過 grid-auto-flow: dense; 讓圖片自動排到第二欄
-       但我們在 RWD 時需要手動控制，所以這裡用 order */
 }
 @media (min-width: 769px) {
     .two-column.reverse .image-content {
@@ -289,7 +278,7 @@ a:hover {
     text-align: center;
 }
 
-/* (*** .social-icons-wrapper 樣式從您原版複製並微調 ***) */
+/* .social-icons-wrapper (維持不變) */
 .social-icons-wrapper {
     display: flex;
     justify-content: center;
@@ -327,7 +316,7 @@ a:hover {
     line-height: 1;
 }
 .footer-qrcode {
-    width: 60px; /* 稍縮小 */
+    width: 60px; 
     height: 60px;
     padding: 4px; 
     background: #ffffff;
@@ -348,34 +337,26 @@ a:hover {
 /* --- 響應式設計 (RWD) --- */
 @media (max-width: 768px) {
     :root {
-        --header-height: 60px; /* 手機版標頭稍矮 */
+        --header-height: 60px; 
     }
 
     .header-container {
-        /* Logo 和 Nav 左右並排，但 Nav 隱藏 */
-        justify-content: space-between;
-        padding: 0 5%;
-    }
-    
-    /* *** 簡易漢堡選單 *** */
-    /* (為了簡潔，這裡不做 JS 漢堡選單，而是讓 Nav 換行) */
-    .header-container {
-        flex-direction: column; /* Logo 和 Nav 垂直堆疊 */
+        flex-direction: column; 
         justify-content: center;
         gap: 10px;
         height: auto;
         padding: 10px 0;
     }
     .site-header {
-        height: auto; /* 高度自動 */
-        position: static; /* 取消黏性定位 */
+        height: auto; 
+        position: static; 
     }
     html {
-        scroll-padding-top: 0; /* 取消錨點偏移 */
+        scroll-padding-top: 0; 
     }
     .site-navigation ul {
         gap: 15px;
-        flex-wrap: wrap; /* 換行 */
+        flex-wrap: wrap; 
         justify-content: center;
     }
     .site-navigation a {
@@ -383,22 +364,17 @@ a:hover {
         padding: 5px;
     }
     .site-navigation a.active::after {
-        display: none; /* 手機版隱藏底線 */
+        display: none; 
     }
-    /* *** 漢堡選單結束 *** */
 
-
+    /* RWD 輪播區塊 */
     .hero-section {
-        min-height: 60vh;
-        padding: 1rem 0;
+        padding: 1rem 0; /* 縮小手機版間距 */
     }
-    .hero-collage {
-        height: 50vh; /* 來自您原版的 RWD */
-        min-height: 300px;
-    }
-    .image-layer {
-        width: 80%; /* 來自您原版的 RWD */
-        left: 10%; /* 置中 */
+    .hero-carousel {
+        /* 在手機上，高寬比可以更高一點 (例如 1:1) */
+        aspect-ratio: 1 / 1; 
+        max-height: 80vh; /* 手機最大高度可高一點 */
     }
     
     .content-section {
@@ -425,6 +401,6 @@ a:hover {
         text-align: center;
     }
     .contact-info i {
-        display: none; /* 簡化手機版資訊 */
+        display: none; 
     }
 }
