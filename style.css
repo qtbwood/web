@@ -9,6 +9,7 @@
 
 html {
     scroll-behavior: smooth; 
+    overflow-x: hidden;
 }
 
 body {
@@ -405,7 +406,7 @@ a:hover {
     
     .hero-collage {
         height: 50vh; 
-        margin-bottom: 0; 
+        margin-bottom: 8vh; 
     }
 
     .image-layer {
