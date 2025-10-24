@@ -424,9 +424,10 @@ a:hover {
 /* --- 響應式設計 (RWD) - 針對手機橫式優化 (低高度) --- */
 @media (orientation: landscape) and (max-height: 500px) {
     
-    /* 縮小輪播區的下邊距 */
+    /* 調整輪播區高度與下邊距，避免橫式手機排版重疊 */
     .hero-collage {
-        margin-bottom: 5vh; 
+        height: 50vw; /* 依據寬度調整高度 */
+        margin-bottom: 15vw; /* 增加下邊距 */
     }
 
     /* 縮小介紹文字的下邊距 */
