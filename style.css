@@ -451,3 +451,11 @@ a:hover {
         margin-top: 5vh;
     }
 }
+
+/* --- 響應式設計 (RWD) - 針對桌面寬扁視窗優化 --- */
+@media (min-width: 769px) and (min-aspect-ratio: 10/7) {
+    .hero-collage {
+        height: 45vw; /* 改為vw單位，確保高度足夠 */
+        max-height: 70vh; /* 避免在極寬螢幕上過高 */
+    }
+}
