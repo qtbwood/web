@@ -318,7 +318,7 @@ a:hover {
 
 
 /* --- 響應式設計 (RWD) --- */
-@media (max-width: 768px), (max-height: 500px) {
+@media (max-width: 768px) {
     /* (RWD 區塊) */
     .site-identifier {
         position: static; 
@@ -421,4 +421,32 @@ a:hover {
         gap: 20px;
     }
 }
+/* --- 響應式設計 (RWD) - 針對手機橫式優化 (低高度) --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    
+    /* 縮小輪播區的下邊距 */
+    .hero-collage {
+        margin-bottom: 5vh; 
+    }
 
+    /* 縮小介紹文字的下邊距 */
+    .intro-text {
+        margin-bottom: 5vh;
+    }
+
+    /* 縮小所有 showcase 區塊的下邊距 */
+    .showcase {
+        margin-bottom: 5vh;
+    }
+
+    /* 縮小服務介紹區塊的上邊距 (原本 20vh 太多) */
+    .showcase-services {
+        margin-top: 5vh; 
+    }
+
+    /* 縮小頁尾的上邊距與內部 padding */
+    .site-footer {
+        padding: 5vh 0;
+        margin-top: 5vh;
+    }
+}
