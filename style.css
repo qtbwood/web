@@ -457,6 +457,6 @@ a:hover {
     .hero-collage {
         height: 40vw; /* 改為vw單位，確保高度足夠 */
         max-height: 65vh; /* 避免在極寬螢幕上過高 */
-        margin-bottom: 5vh; /* 新增下邊距，避免內容重疊 */
+        margin-bottom: 8vh; /* 新增下邊距，避免內容重疊 */
     }
 }
