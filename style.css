@@ -66,11 +66,7 @@ a:hover {
     height: var(--header-height);
     position: sticky;
     top: 0;
-    /* (*** 關鍵修改 ***) 
-     * 移除了 z-index: 1000; 
-     * 避免它建立新的堆疊情境(stacking context)
-     * 導致選單被遮罩蓋過 
-     */
+    z-index: 1000;
 }
 
 .header-container {
@@ -378,7 +374,7 @@ a:hover {
         height: 100vh;
         background-color: #ffffff;
         box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* (修改) 陰影在右側 */
-        z-index: 2000; /* (關鍵) 必須高於遮罩的 1500 */
+        z-index: 2000;
         transition: left 0.4s ease-in-out; /* (修改) 動畫屬性為 left */
         padding-top: 50px;
     }
@@ -559,7 +555,7 @@ a:hover {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1500; /* (關鍵) 必須低於選單的 2000 */
+        z-index: 1500;
         display: none; /* 預設隱藏 */
         opacity: 0;
         transition: opacity 0.4s ease;
