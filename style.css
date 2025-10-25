@@ -218,7 +218,7 @@ a:hover {
 }
 .two-column .image-content img {
     border-radius: 5px;
-    /* *** 新增：與地圖統一的陰影 (立體感) *** */
+    /* *** 新增：陰影 (立體感) *** */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 /* 圖片在右邊 */
@@ -247,7 +247,7 @@ a:hover {
     overflow: hidden;
     border-radius: 5px;
 
-    /* *** 新增：只在地圖上加入更明顯的陰影 (立體感) *** */
+    /* *** 新增：明顯的陰影 (立體感) *** */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 .map-placeholder iframe {
@@ -335,28 +335,16 @@ a:hover {
         --header-height: 60px; 
     }
 
-    /* (*** 修改 ***) 
-     * 1. 移除 position: static 讓它恢復 sticky
-     * 2. 移除 height: auto 讓它固定高度
-     */
     .site-header {
         height: var(--header-height); 
-        /* position: static; (移除此行) */
     }
     
-    /* (*** 修改 ***) 
-     * 1. 改用 grid 實現「左-中-右」佈局
-     * 2. 移除 padding，因為按鈕需要貼邊
-     */
     .header-container {
         display: grid;
         grid-template-columns: 1fr auto 1fr; /* (左) 1fr (中) auto (右) 1fr */
         align-items: center;
         height: 100%;
         padding: 0; /* 移除 padding */
-        /* (移除) flex-direction: column; */
-        /* (移除) justify-content: center; */
-        /* (移除) gap: 10px; */
     }
 
     /* (*** 新增 ***) Logo 置中 */
@@ -388,8 +376,6 @@ a:hover {
         flex-direction: column;
         gap: 0;
         align-items: flex-start;
-        /* (移除) flex-wrap: wrap; */
-        /* (移除) justify-content: center; */
     }
 
     /* (*** 修改 ***) 選單連結樣式 */
@@ -401,12 +387,7 @@ a:hover {
         border-bottom: 1px solid #f0f0f0;
     }
 
-    /* (*** 修改 ***) 
-     * 1. 移除 'display: none'
-     * 2. (關鍵) 新增背景高亮作為手機版指示
-     */
     .site-navigation a.active::after {
-        /* display: none; (移除此行) */
         display: none; /* 保留此行，避免PC底線樣式干擾，我們改用下面的背景高亮 */
     }
     
