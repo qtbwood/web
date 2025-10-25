@@ -139,4 +139,36 @@ document.addEventListener("DOMContentLoaded", function() {
     animatedElements.forEach(el => {
         observer.observe(el);
     });
+
+    // --- 4. (*** 新增 ***) 漢堡選單功能 ---
+    const navMenu = document.getElementById('mobile-nav');
+    const openBtn = document.getElementById('nav-open-btn');
+    const closeBtn = document.getElementById('nav-close-btn');
+    const overlay = document.getElementById('menu-overlay');
+    const navLinksInMenu = document.querySelectorAll('#mobile-nav ul a');
+
+    if (navMenu && openBtn && closeBtn && overlay) {
+        
+        // (A) 功能：開啟選單
+        function openMenu() {
+            navMenu.classList.add('is-open');
+            overlay.classList.add('is-open');
+        }
+
+        // (B) 功能：關閉選單
+        function closeMenu() {
+            navMenu.classList.remove('is-open');
+            overlay.classList.remove('is-open');
+        }
+
+        // (C) 綁定事件
+        openBtn.addEventListener('click', openMenu);  // 點漢堡圖示，開啟
+        closeBtn.addEventListener('click', closeMenu); // 點 "X"，關閉
+        overlay.addEventListener('click', closeMenu);  // 點遮罩，關閉
+
+        // (D) (關鍵！) 點擊選單中的連結時，也要關閉選單
+        navLinksInMenu.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
 });
