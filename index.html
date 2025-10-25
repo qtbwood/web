@@ -11,10 +11,21 @@
 
     <header class="site-header">
         <div class="container header-container">
+            
+            <button class="nav-open-btn" id="nav-open-btn" aria-label="開啟選單">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
             <a href="#home" class="site-logo">
                 <img src="img/0.png" alt="橋頭寶台灣檜木 Logo">
             </a>
-            <nav class="site-navigation">
+
+            <nav class="site-navigation" id="mobile-nav">
+                
+                <button class="nav-close-btn" id="nav-close-btn" aria-label="關閉選單">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                
                 <ul>
                     <li><a href="#home" class="active">首頁</a></li>
                     <li><a href="#about">關於我們</a></li>
@@ -25,6 +36,8 @@
             </nav>
         </div>
     </header>
+
+    <div class="mobile-menu-overlay" id="menu-overlay"></div>
 
     <main>
 
