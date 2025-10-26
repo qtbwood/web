@@ -117,8 +117,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const linkHref = link.getAttribute('href');
             
             if (document.body.classList.contains('gallery-page')) {
-                // 在 Gallery 頁面，高亮 "老件新生"
-                if (linkHref.includes('restoration')) {
+                // (*** 關鍵修改 ***)
+                // 在 Gallery 頁面，高亮 "整理紀實"
+                if (linkHref.includes('gallery.html')) {
                     link.classList.add('active');
                 }
             } else {
