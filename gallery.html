@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>整理紀實 - 橋頭寶台灣檜木</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="gallery-page">
+
+    <header class="site-header">
+        <div class="container header-container">
+            
+            <button class="nav-open-btn" id="nav-open-btn" aria-label="開啟選單">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <a href="index.html" class="site-logo">
+                <img src="img/0.png" alt="橋頭寶台灣檜木 Logo">
+            </a>
+
+            <nav class="site-navigation" id="mobile-nav">
+                
+                <button class="nav-close-btn" id="nav-close-btn" aria-label="關閉選單">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                
+                <ul>
+                    <li><a href="index.html#home">首頁</a></li>
+                    <li><a href="index.html#about">關於我們</a></li>
+                    <li><a href="index.html#restoration" class="active">老件新生</a></li>
+                    <li><a href="index.html#services">服務介紹</a></li>
+                    <li><a href="index.html#contact">蒞臨指教</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="mobile-menu-overlay" id="menu-overlay"></div>
+    </header>
+
+    <main class="gallery-main">
+
+        <section class="gallery-title">
+            <div class="container">
+                <nav class="breadcrumbs">
+                    <a href="index.html">首頁</a> &gt; 
+                    <a href="index.html#restoration">老件新生</a> &gt; 
+                    <span>整理紀實</span>
+                </nav>
+                <h1 class="section-title">整理紀實</h1>
+                <p class="section-subtitle">點選案件預覽圖以查看詳情。見證老件重獲新生的每一刻。</p>
+            </div>
+        </section>
+
+        <section class="case-viewer" id="case-viewer-target">
+            
+            <div class="case-viewer-placeholder" id="case-viewer-placeholder">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <h3>請點選下方的案件</h3>
+                <p>點選後，詳細的整理照片將會顯示於此處。</p>
+            </div>
+
+            <div class="case-content" id="case-content-area" style="display: none;">
+                
+                <div class="case-carousel">
+                    <img src="img/a1.jpg" alt="案件展示圖" id="case-image">
+                    <button class="case-nav prev" id="case-prev" aria-label="上一張"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="case-nav next" id="case-next" aria-label="下一張"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="case-counter" id="case-counter">1 / 8</div>
+                </div>
+                
+                <div class="case-details">
+                    <h3 id="case-title">案件一：台灣檜木方桌</h3>
+                    <p id="case-description">這裡是該案件的詳細說明文字...</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="case-selector" id="case-selector">
+            <div class="container">
+
+                <div class="case-grid">
+                    
+                    <div class="case-card" data-case="case-1" tabindex="0">
+                        <div class="case-frame"> <img src="img/a0.jpg" alt="案件一 預覽圖" class="case-preview-img">
+                        </div>
+                        <h4 class="case-item-title">案件一：檜木方桌</h4>
+                    </div>
+
+                    <div class="case-card" data-case="case-2" tabindex="0">
+                        <div class="case-frame">
+                            <img src="img/p0.jpg" alt="案件二 預覽圖" class="case-preview-img">
+                        </div>
+                        <h4 class="case-item-title">案件二：(尚未命名)</h4>
+                    </div>
+
+                    <div class="case-card" data-case="case-3" tabindex="0">
+                         <div class="case-frame">
+                            <img src="img/p0.jpg" alt="案件三 預覽圖" class="case-preview-img">
+                        </div>
+                        <h4 class="case-item-title">案件三：(尚未命名)</h4>
+                    </div>
+
+                    <div class="case-card" data-case="case-4" tabindex="0">
+                         <div class="case-frame">
+                            <img src="img/p0.jpg" alt="案件四 預覽圖" class="case-preview-img">
+                        </div>
+                        <h4 class="case-item-title">案件四：(尚未命名)</h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="social-icons-wrapper">
+            <a href="https://www.facebook.com/profile.php?id=100057663481009" target="_blank" class="icon-link icon-fb" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.ruten.com.tw/store/v2sniper/" target="_blank" class="icon-link icon-ruten" aria-label="Ruten">
+                <span>露</span>
+            </a>
+            <div class="footer-qrcode">
+                <img src="img/qtb.png" alt="QR Code">
+            </div>
+        </div>
+        <p class="copyright">© 2025 橋頭寶台灣檜木. All Rights Reserved. Gemini</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
