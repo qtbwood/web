@@ -7,6 +7,13 @@
     --text-color: #333;
     --accent-color-blue: #003366;
     --header-height: 70px;
+    
+    /* (新增) Gallery 用的高亮色 */
+    --accent-color-green: #4CAF50; 
+    
+    /* (新增) 木紋板塊模擬色 */
+    --wood-plank-dark: #b08a5a;
+    --wood-plank-light: #d3ad7c; 
 }
 
 html {
@@ -24,6 +31,22 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
 }
+
+/* (*** 關鍵修改 ***) 
+   使用兩刀切、角度更斜的背景 */
+body.gallery-page {
+    background: linear-gradient(
+        130deg, /* (修改) 角度更斜 (原 115deg) */
+        var(--bg-color) 0%, 
+        var(--bg-color) 35%, /* 第一刀: 35% 處 */
+        var(--bg-light) 35.1%, /* 白色區塊開始 */
+        var(--bg-light) 65%, /* 第二刀: 65% 處 */
+        var(--bg-color) 65.1%, /* 米色區塊開始 */
+        var(--bg-color) 100%
+    );
+    background-attachment: fixed; /* 固定背景，滾動時內容移動，背景不動 */
+}
+
 
 * {
     box-sizing: border-box;
@@ -271,7 +294,24 @@ a:hover {
     color: #f0f0f0;
     padding: 3rem 0;
     text-align: center;
+    
+    /* (新增) 確保頁尾在 gallery 頁面正常顯示 */
+    margin-top: 4rem; /* 和下方內容拉開距離 */
+    position: relative; /* 確保 z-index 生效 */
+    z-index: 10; 
 }
+
+/* (*** 新增 ***) 
+   在 Gallery 頁面，頁尾背景改為透明，
+   使其融入斜切背景 */
+.gallery-page .site-footer {
+    background-color: transparent;
+    color: #555; /* 文字改為深色 */
+}
+.gallery-page .copyright {
+    color: #777;
+}
+
 
 /* .social-icons-wrapper (維持不變) */
 .social-icons-wrapper {
@@ -458,7 +498,7 @@ a:hover {
 }
 
 .dot {
-    width: 20px; /* 每個點的寬度 (模仿 q.png 的短線) */
+    width: 20px; /* 每個點的寬度 */
     height: 4px; /* 每個點的高度 */
     background-color: rgba(255, 255, 255, 0.3); /* 未啟用時的顏色 */
     border-radius: 2px; /* 讓短線變圓角 */
@@ -481,7 +521,7 @@ a:hover {
     left: 0;
     height: 100%;
     width: 0%; /* 初始寬度為 0 */
-    background-color: #4CAF50; /* 綠色 */
+    background-color: var(--accent-color-green); /* (修改) 引用變數 */
     border-radius: 2px;
 }
 
@@ -546,5 +586,289 @@ a:hover {
     .mobile-menu-overlay.is-open {
         display: block;
         opacity: 1;
+    }
+}
+
+
+/* --- 8. Gallery 頁面樣式 --- */
+
+.gallery-main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* A. 獨立的標題區 */
+.gallery-title {
+    padding: 4rem 0 2rem 0;
+    background-color: transparent;
+    position: relative;
+    z-index: 5;
+}
+
+/* 麵包屑樣式 */
+.gallery-title .breadcrumbs {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center; 
+}
+.gallery-title .breadcrumbs a {
+    color: var(--text-color); 
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+.gallery-title .breadcrumbs a:hover {
+    opacity: 1;
+}
+.gallery-title .breadcrumbs span {
+    opacity: 1;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* C. 案件預覽網格 */
+.case-selector {
+    padding: 4rem 0; 
+    background-color: transparent; 
+}
+
+.case-selector .container {
+    position: relative;
+    z-index: 5;
+}
+
+/* 標題 H1 */
+.section-title {
+    text-align: center;
+    font-size: 2.2rem; 
+    color: var(--accent-color-blue); 
+    margin-top: 0;
+    margin-bottom: 0.5rem; 
+}
+
+/* 副標題 P */
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 0rem; 
+}
+
+/* 2x2 網格 */
+.case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+/* (*** 關鍵修改 ***) 卡片容器 (JS 依賴 .case-card) */
+.case-card {
+    border: none;
+    border-radius: 0;
+    overflow: visible; /* 讓光暈可見 */
+    box-shadow: none;
+    background-color: transparent;
+    
+    /* 改為 flex 垂直佈局 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平置中圖框和文字 */
+    
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    
+    /* (*** 新增 ***) 
+       為 active 的光暈預留空間 */
+    padding: 10px;
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+}
+
+/* (*** 關鍵修改 ***) 選中狀態 (綠色光暈) */
+.case-card.active {
+    border-radius: 20px; /* 讓光暈變圓角 */
+    box-shadow: 0 0 25px 8px rgba(76, 175, 80, 0.7);
+}
+
+
+/* (*** 新增 ***) 圖框本體 */
+.case-frame {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* 預覽圖的比例 */
+    
+    /* (*** 關鍵 ***) 
+       border-image 核心設定 */
+    border-style: solid;
+    border-width: 40px; /* 圖框的視覺寬度 (可調整) */
+    border-image-source: url('img/o1.png');
+    border-image-slice: 100 fill; /* 切割 o1.png 的角落 (100px) */
+    border-image-repeat: stretch; /* 拉伸 o1.png 的邊 */
+    
+    box-sizing: border-box; /* 確保 padding 在寬度內 */
+}
+
+/* (*** 新增 ***) 
+   圖框內部的預覽圖 */
+.case-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* (*** 新增 ***) 
+   圖框外部的文字 */
+.case-item-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color-blue);
+    margin-top: 1rem; /* 與圖框的間距 */
+    text-align: center;
+}
+
+
+/* B. 案件展示舞台 (輪播區) */
+.case-viewer {
+    padding: 2rem; 
+    background-color: var(--bg-light); 
+    
+    /* 浮動卡片樣式 */
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    
+    /* 限制寬度 */
+    max-width: 1100px; 
+    width: 90%;
+    margin: 0 auto; /* 置中 */
+    position: relative; 
+    z-index: 5;
+}
+
+.case-viewer-placeholder {
+    text-align: center;
+    color: #888;
+    padding: 3rem 0;
+}
+.case-viewer-placeholder i {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+/* 輪播本體 */
+.case-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.case-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 輪播按鈕 */
+.case-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.3);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 5;
+}
+.case-nav:hover {
+    background-color: rgba(0,0,0,0.6);
+}
+.case-nav.prev { left: 10px; }
+.case-nav.next { right: 10px; }
+
+/* 輪播計數器 */
+.case-counter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.5);
+    color: #ffffff;
+    font-size: 0.9rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+/* 案件說明 */
+.case-details {
+    padding-top: 1.5rem;
+}
+.case-details h3 {
+    font-size: 1.5rem;
+    color: var(--accent-color-blue);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+
+/* --- Gallery 頁面 RWD (*** o1.png 結構修改版 ***) --- */
+
+/* PC 版 (大於 768px) */
+@media (min-width: 769px) {
+
+    /* PC 版輪播改為兩欄 (圖左文右) */
+    .case-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    .case-details {
+        padding-top: 0;
+    }
+    .case-carousel {
+        aspect-ratio: 16 / 9; /* PC 改為 16:9 */
+    }
+
+    /* PC 版 2x2 網格間距 */
+    .case-grid {
+        gap: 3rem; /* (*** 修改 ***) o1.png 模式間距拉大 */
+    }
+}
+
+/* 手機版 (小於 768px) */
+@media (max-width: 768px) {
+    
+    .gallery-title {
+        padding: 2rem 0 1rem 0; /* 手機版縮小 padding */
+    }
+    
+    .case-viewer {
+        padding: 1rem; /* 手機版縮小 padding */
+    }
+    
+    .case-selector {
+        padding: 3rem 0; /* 手機版縮小 padding */
+    }
+
+    /* (*** 關鍵修改 ***) 
+       手機版改為 1 欄，以顯示 o1.png 細節 */
+    .case-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 400px; /* 限制最大寬度 */
+        margin: 0 auto; /* 置中 */
     }
 }
