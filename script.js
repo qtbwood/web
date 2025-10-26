@@ -199,21 +199,21 @@ document.addEventListener("DOMContentLoaded", function() {
         // (我們加入 isPlaceholder 標記)
         const caseData = {
             'case-1': {
-                title: '案件一：台灣檜木方桌',
+                title: '物件一：台灣檜木方桌',
                 images: ['img/a1.jpg', 'img/a2.jpg', 'img/a3.jpg', 'img/a4.jpg', 'img/a5.jpg', 'img/a6.jpg', 'img/a7.jpg', 'img/a8.jpg'],
                 description: '這組經典的檜木方桌，經過除漆、修補、上護木漆後，重現了溫潤的木質光澤。',
                 isPlaceholder: false // 這是有內容的案件
             },
             'case-2': {
-                title: '案件二：(尚未命名)',
+                title: '物件二：(待補充)',
                 isPlaceholder: true // 這是佔位符
             },
             'case-3': {
-                title: '案件三：(尚未命名)',
+                title: '物件三：(待補充)',
                 isPlaceholder: true // 這是佔位符
             },
             'case-4': {
-                title: '案件四：(尚未命名)',
+                title: '物件四：(待補充)',
                 isPlaceholder: true // 這是佔位符
             }
         };
