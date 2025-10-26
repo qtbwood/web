@@ -437,6 +437,17 @@ a:hover {
         color: var(--accent-color-blue);   /* (新增) 藍色文字 */
     }
 
+    /* === (*** 新增 ***) 漢堡選單子項目樣式 === */
+    .site-navigation .nav-sub-item a {
+        padding-left: 45px; /* 增加左側內距，使其看起來像子項目 */
+        background-color: #fdfaf7; /* 稍微變更背景色以示區別 */
+    }
+    .site-navigation .nav-sub-item a.active,
+    .site-navigation .nav-sub-item a:hover {
+        background-color: var(--bg-color); /* 統一高亮/懸停顏色 */
+    }
+    /* === (*** 新增結束 ***) === */
+
 
     /* RWD 輪播區塊 */
     .hero-section {
