@@ -1,4 +1,4 @@
-// script.js (修正版：移除所有 .style 操作)
+// script.js
 
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -90,27 +90,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // --- 2. 導覽列滾動高亮 (維持不變) ---
     const navLinks = document.querySelectorAll('.site-navigation a');
-    const sections = document.querySelectorAll('main > .content-section'); 
+    // (*** 修改 ***) 區塊選擇器現在更通用，以支援 gallery 頁面
+    const sections = document.querySelectorAll('main > section[id]'); 
 
     function updateActiveNavLink() {
         let currentSectionId = 'home'; // 預設為 home
         const headerOffset = 100; // 偏移量，觸發點提早 100px
 
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - headerOffset) {
-                currentSectionId = section.id;
+        if (sections.length > 0) {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - headerOffset) {
+                    currentSectionId = section.id;
+                }
+            });
+
+            if (window.scrollY < sections[0].offsetTop - headerOffset) {
+                currentSectionId = 'home';
             }
-        });
-
-        if (window.scrollY < sections[0].offsetTop - headerOffset) {
-            currentSectionId = 'home';
         }
-
+        
+        // (*** 修改 ***) 檢查連結的 href 是否 *包含* ID
+        // 這樣 index.html#restoration 和 gallery.html 上的 .active 都能正確反白
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(currentSectionId)) {
-                link.classList.add('active');
+            const linkHref = link.getAttribute('href');
+            
+            if (document.body.classList.contains('gallery-page')) {
+                // 在 Gallery 頁面，高亮 "老件新生"
+                if (linkHref.includes('restoration')) {
+                    link.classList.add('active');
+                }
+            } else {
+                // 在首頁，正常高亮
+                if (linkHref.includes(currentSectionId)) {
+                    link.classList.add('active');
+                }
             }
         });
     }
@@ -119,7 +134,8 @@ document.addEventListener("DOMContentLoaded", function() {
     updateActiveNavLink(); // 初始載入時執行一次
 
     // --- 3. 區塊進場動畫 (維持不變) ---
-    const animatedElements = document.querySelectorAll('.content-section'); 
+    // (*** 修改 ***) 區塊選擇器現在更通用
+    const animatedElements = document.querySelectorAll('.content-section, .case-selector, .case-viewer'); 
 
     const observerOptions = {
         root: null,
@@ -171,4 +187,152 @@ document.addEventListener("DOMContentLoaded", function() {
             link.addEventListener('click', closeMenu);
         });
     }
+    
+    
+    // --- 5. (*** 新增 ***) Gallery 頁面互動 ---
+    
+    // 檢查是否在 Gallery 頁面 (透過偵測特定 ID)
+    const caseViewer = document.getElementById('case-viewer-target');
+    if (caseViewer) {
+        
+        // --- (A) 案件資料庫 (*** 關鍵修改 ***) ---
+        // (我們加入 isPlaceholder 標記)
+        const caseData = {
+            'case-1': {
+                title: '案件一：台灣檜木方桌',
+                images: ['img/a1.jpg', 'img/a2.jpg', 'img/a3.jpg', 'img/a4.jpg', 'img/a5.jpg', 'img/a6.jpg', 'img/a7.jpg', 'img/a8.jpg'],
+                description: '這組經典的檜木方桌，經過除漆、修補、上護木漆後，重現了溫潤的木質光澤。',
+                isPlaceholder: false // 這是有內容的案件
+            },
+            'case-2': {
+                title: '案件二：(尚未命名)',
+                isPlaceholder: true // 這是佔位符
+            },
+            'case-3': {
+                title: '案件三：(尚未命名)',
+                isPlaceholder: true // 這是佔位符
+            },
+            'case-4': {
+                title: '案件四：(尚未命名)',
+                isPlaceholder: true // 這是佔位符
+            }
+        };
+
+        // --- (B) 獲取 DOM 元素 ---
+        const caseCards = document.querySelectorAll('.case-card');
+        const placeholder = document.getElementById('case-viewer-placeholder');
+        const contentArea = document.getElementById('case-content-area');
+        
+        const caseImage = document.getElementById('case-image');
+        const caseTitle = document.getElementById('case-title');
+        const caseDescription = document.getElementById('case-description');
+        const caseCounter = document.getElementById('case-counter');
+        const prevBtn = document.getElementById('case-prev');
+        const nextBtn = document.getElementById('case-next');
+
+        let currentCaseImages = [];
+        let currentImageIndex = 0;
+
+        // --- (C) 核心功能：顯示案件 (*** 關鍵修改 ***) ---
+        function showCase(caseId) {
+            // 1. 獲取案件資料
+            const data = caseData[caseId];
+            if (!data) return;
+
+            // 2. 更新預覽卡片高亮 (*** 步驟提前 ***)
+            caseCards.forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.case === caseId) {
+                    card.classList.add('active');
+                }
+            });
+
+            // 3. (*** 關鍵 ***) 檢查是否為佔位符
+            if (data.isPlaceholder) {
+                // 是佔位符：顯示提示訊息
+                if (contentArea) contentArea.style.display = 'none'; // 隱藏輪播
+                if (placeholder) {
+                    placeholder.style.display = 'block'; // 顯示提示區
+                    // (*** 新增 ***) 更新提示文字
+                    placeholder.querySelector('h3').textContent = '案件詳情 ' + data.title;
+                    placeholder.querySelector('p').textContent = '即將推出，敬請期待...';
+                }
+            } else {
+                // 不是佔位符：顯示輪播
+                if (placeholder) placeholder.style.display = 'none'; // 隱藏提示
+                if (contentArea) {
+                    // 顯示輪播
+                    if (window.matchMedia("(min-width: 769px)").matches) {
+                        contentArea.style.display = 'grid';
+                    } else {
+                        contentArea.style.display = 'block';
+                    }
+                }
+
+                // 4. 更新輪播狀態
+                currentCaseImages = data.images;
+                currentImageIndex = 0;
+
+                // 5. 填入內容
+                caseTitle.textContent = data.title;
+                caseDescription.textContent = data.description;
+                updateCarousel();
+            }
+
+            // 6. (關鍵) 自動滾動到輪播區
+            // (我們只在手機版 RWD 斷點下觸發滾動)
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                caseViewer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // --- (D) 核心功能：更新輪播畫面 ---
+        function updateCarousel() {
+            caseImage.src = currentCaseImages[currentImageIndex];
+            caseCounter.textContent = `${currentImageIndex + 1} / ${currentCaseImages.length}`;
+            
+            // 處理按鈕禁用
+            prevBtn.disabled = (currentImageIndex === 0);
+            nextBtn.disabled = (currentImageIndex === currentCaseImages.length - 1);
+        }
+
+        // --- (E) 綁定事件 ---
+
+        // 1. 綁定所有預覽卡片
+        caseCards.forEach(card => {
+            card.addEventListener('click', () => {
+                showCase(card.dataset.case);
+            });
+            // 增加鍵盤可訪問性
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    showCase(card.dataset.case);
+                }
+            });
+        });
+
+        // 2. 綁定輪播按鈕
+        prevBtn.addEventListener('click', () => {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentImageIndex < currentCaseImages.length - 1) {
+                currentImageIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // (*** 新增 ***) 首次載入時，預設顯示案件一
+        // (因為案件一 isPlaceholder: false, 所以會正常顯示輪播)
+        showCase('case-1');
+    }
+    
 });
