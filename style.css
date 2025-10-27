@@ -188,8 +188,8 @@ a:hover {
     padding: 4rem 0;
     /* 這是您原本的進場動畫 */
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    transform: translateY(30px);
+    transition: opacity 1.0s ease-out, transform 1.0s ease-out;
 }
 /* #home (輪播區塊) 不需要這個效果 */
 .hero-section {
@@ -645,8 +645,8 @@ a:hover {
     background-color: transparent; 
     /* 入場動畫起始狀態 */
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    transform: translateY(30px);
+    transition: opacity 1.0s ease-out, transform 1.0s ease-out;
 }
 
 .case-selector .container {
