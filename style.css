@@ -760,7 +760,7 @@ a:hover {
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 
     /* 增加底部外距以推開下方選單 */
-    margin-bottom: 8rem;
+    margin-bottom: 15rem;
 
     /* 限制寬度 */
     max-width: 1100px; 
