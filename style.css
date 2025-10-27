@@ -642,6 +642,10 @@ a:hover {
 .case-selector {
     padding: 4rem 0; 
     background-color: transparent; 
+    /* 入場動畫起始狀態 */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
 .case-selector .container {
@@ -749,7 +753,15 @@ a:hover {
     /* 浮動卡片樣式 */
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    
+
+    /* 動畫起始狀態 */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+
+    /* 增加底部外距以推開下方選單 */
+    margin-bottom: 3rem;
+
     /* 限制寬度 */
     max-width: 1100px; 
     width: 90%;
@@ -885,3 +897,4 @@ a:hover {
         margin: 0 auto; /* 置中 */
     }
 }
+
