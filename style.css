@@ -643,9 +643,6 @@ a:hover {
     margin-top: 2rem;
     padding: 4rem 0; 
     background-color: transparent; 
-    /* 入場動畫起始狀態 */
-    opacity: 0;
-    transition: opacity 1.5s ease-out;
 }
 
 .case-selector .container {
@@ -753,10 +750,6 @@ a:hover {
     /* 浮動卡片樣式 */
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-
-    /* 動畫起始狀態 */
-    opacity: 0;
-    transition: opacity 1.5s ease-out;
 
     /* 限制寬度 */
     max-width: 1100px; 
