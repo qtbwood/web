@@ -184,7 +184,9 @@ a:hover {
 
 
 /* --- 3-6. 內容區塊 (維持不變) --- */
-.content-section {
+.content-section,
+.case-selector,
+.case-viewer {
     padding: 4rem 0;
     /* 這是您原本的進場動畫 */
     opacity: 0;
