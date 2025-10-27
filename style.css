@@ -196,24 +196,9 @@ a:hover {
     opacity: 1;
     transform: none;
 }
-.content-section.visible,
-.case-selector.visible,
-.case-viewer.visible {
+.content-section.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* (保留) 對 content-section 的 padding 微調 (如果需要) */
-.content-section {
-    padding: 4rem 0;
-}
-/* (新增) 對 gallery 頁面區塊的 padding 微調 */
-.gallery-page .case-selector,
-.gallery-page .case-viewer {
-    padding: 2rem 0; /* 讓 gallery 頁的間距小一點 */
-}
-.gallery-page .case-viewer {
-    padding-bottom: 0; /* viewer 不需要底部 padding */
 }
 
 .content-section h2 {
@@ -898,4 +883,3 @@ a:hover {
         margin: 0 auto; /* 置中 */
     }
 }
-
