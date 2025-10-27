@@ -757,8 +757,8 @@ a:hover {
 
     /* 動畫起始狀態 */
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    transform: translateY(30px);
+    transition: opacity 1.0s ease-out, transform 1.0s ease-out;
 
     /* 限制寬度 */
     max-width: 1100px; 
