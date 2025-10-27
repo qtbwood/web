@@ -640,6 +640,7 @@ a:hover {
 
 /* C. 案件預覽網格 */
 .case-selector {
+    margin-top: 4rem;
     padding: 4rem 0; 
     background-color: transparent; 
     /* 入場動畫起始狀態 */
@@ -760,7 +761,7 @@ a:hover {
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 
     /* 增加底部外距以推開下方選單 */
-    margin-bottom: 15rem;
+    /* margin-bottom: 15rem; */
 
     /* 限制寬度 */
     max-width: 1100px; 
