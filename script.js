@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const openBtn = document.getElementById('nav-open-btn');
     const closeBtn = document.getElementById('nav-close-btn');
     const overlay = document.getElementById('menu-overlay');
-    const navLinksInMenu = document.querySelectorAll('#mobile-nav ul a');
+    // (*** 關鍵修改 ***) 刪除了舊的 navLinksInMenu 變數和迴圈
 
     if (navMenu && openBtn && closeBtn && overlay) {
         
@@ -183,10 +183,9 @@ document.addEventListener("DOMContentLoaded", function() {
         closeBtn.addEventListener('click', closeMenu); // 點 "X"，關閉
         overlay.addEventListener('click', closeMenu);  // 點遮罩，關閉
 
-        // (D) (關鍵！) 點擊選單中的連結時，也要關閉選單
-        navLinksInMenu.forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
+        // (D) (*** 關鍵修改 ***) 
+        // 舊的「點擊連結關閉選單」邏輯已被移除
+        // 它被合併到下面的「錨點連結平滑滾動」邏輯中
     }
     
     
@@ -335,5 +334,87 @@ document.addEventListener("DOMContentLoaded", function() {
         // (因為案件一 isPlaceholder: false, 所以會正常顯示輪播)
         showCase('case-1');
     }
+    
+    
+    // --- 6. (*** 關鍵新增 ***) 錨點連結平滑滾動與手機選單關閉 (宵夜點子實作) ---
+    
+    // (A) 獲取手機選單的 DOM (以便存取)
+    const mobileNavForScroll = document.getElementById('mobile-nav');
+    const mobileOverlayForScroll = document.getElementById('menu-overlay');
+
+    // (B) 定義關閉選單的函數 (這樣我們才能在點擊時呼叫它)
+    function closeMenuForScroll() {
+        if (mobileNavForScroll) {
+            mobileNavForScroll.classList.remove('is-open');
+        }
+        if (mobileOverlayForScroll) {
+            mobileOverlayForScroll.classList.remove('is-open');
+        }
+    }
+
+    // (C) 獲取 CSS 變數
+    // 動畫偏移量 (*** 關鍵：這個數字必須和 style.css 中的 translateY(30px) 一致 ***)
+    const animationOffset = 30; 
+    // 標頭高度 (從 CSS 變數 :root { --header-height: 70px; } 讀取)
+    const headerOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10) || 70;
+
+    // (D) 選取「所有」導覽列中指向錨點的連結
+    const allAnchorLinks = document.querySelectorAll('.site-navigation a[href*="#"]');
+
+    allAnchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            
+            const href = this.getAttribute('href');
+            const [path, hash] = href.split('#');
+
+            // 檢查是否為「跨頁面」的錨點連結 (例如從 gallery.html 點擊 index.html#contact)
+            // location.pathname 在本地可能為 /index.html, 在伺服器可能為 / 或 /目錄/
+            // 我們用 .endsWith() 來確保相容性
+            const isCurrentPageLink = (
+                path === '' || 
+                (path === 'index.html' && (window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/'))) ||
+                (path === 'gallery.html' && window.location.pathname.endsWith('/gallery.html'))
+            );
+            
+            // 情況 1：如果這是「跨頁面」的錨點連結
+            if (!isCurrentPageLink) {
+                // 是跨頁連結，我們唯一要做的就是關閉手機選單 (如果它開著)
+                closeMenuForScroll();
+                return; // 結束，讓瀏覽器執行預設跳轉
+            }
+
+            // 情況 2：這是一個「當前頁面」的錨點連結 (path === '')
+            if (!hash) return; // 以防萬一，如果沒有 hash 也不處理
+            
+            const targetElement = document.getElementById(hash);
+
+            if (targetElement) {
+                // (1) 阻止瀏覽器的預設 "跳轉" 行為
+                e.preventDefault();
+
+                // (2) 獲取目標的頂部位置
+                let targetPosition = targetElement.offsetTop;
+
+                // (3) 實作您的「宵夜點子」：檢查動畫是否已播放
+                // 如果目標*沒有* 'visible' class (動畫還沒跑過)
+                if (!targetElement.classList.contains('visible')) {
+                    // 我們就在計算時，手動減去那個 30px 的偏移量
+                    targetPosition -= animationOffset;
+                }
+
+                // (4) 計算最終滾動位置 (減去標頭高度)
+                const finalScrollPosition = targetPosition - headerOffset;
+                
+                // (5) 執行平滑滾動
+                window.scrollTo({
+                    top: finalScrollPosition,
+                    behavior: 'smooth'
+                });
+
+                // (6) 關閉手機選單 (如果它開著的話)
+                closeMenuForScroll();
+            }
+        });
+    });
     
 });
