@@ -886,3 +886,32 @@ a:hover {
         margin: 0 auto; /* 置中 */
     }
 }
+
+/* --- 首頁服務介紹列表 --- */
+.service-list {
+    list-style: none; /* 移除項目符號 */
+    padding-left: 0;   /* 移除瀏覽器預設的內距 */
+    margin-top: 1.5rem; /* 與標題 H2 增加間距 */
+    margin-bottom: 1.5rem; /* 與下方的送貨文字增加間距 */
+}
+
+.service-list li {
+    font-size: 1.1rem; /* 讓字體稍大一點 */
+    padding: 5px 0;  /* 增加列表項目的上下間距 */
+    line-height: 1.6;
+}
+
+/* 處理手機版 RWD (原本 .text-content 會置中) */
+@media (max-width: 768px) {
+    .service-list {
+        display: inline-block; /* 讓 ul 區塊本身在置中的 .text-content 內置中 */
+        text-align: left;    /* 但 ul 內部的文字 (li) 保持靠左對齊，較易閱讀 */
+    }
+}
+
+/* (可選) 讓運送資訊的文字稍微不同 */
+.service-delivery {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 1.5rem;
+}
