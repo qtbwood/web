@@ -30,10 +30,16 @@ body {
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
+    /* === (新增) 細微的麻布/紙張紋理 === */
+    /* 我們使用 CSS 漸層來繪製非常細的交叉線條 */
+    background-image: 
+        linear-gradient(270deg, rgba(0,0,0,.02), rgba(0,0,0,0) 50%),
+        linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,0) 50%);
+    background-size: 8px 8px; /* 調整紋理的精細度 (數字越小越細) */
+    /* === (新增結束) === */
 }
 
-/* (*** 關鍵修改 ***) 
-   使用兩刀切、角度更斜的背景 */
+/* 使用兩刀切、角度更斜的背景 */
 body.gallery-page {
     background: linear-gradient(
         130deg, /* (修改) 角度更斜 (原 115deg) */
