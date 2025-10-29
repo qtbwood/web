@@ -921,3 +921,10 @@ a:hover {
     color: #555;
     margin-top: 1.5rem;
 }
+
+/* --- 標題圖示間距 --- */
+.content-section h2 i {
+    margin-right: 10px; /* 圖示與文字的間距 */
+    font-size: 0.9em;   /* 讓圖示比文字略小一點 */
+    vertical-align: middle; /* 垂直對齊 (可選) */
+}
