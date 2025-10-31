@@ -783,7 +783,7 @@ a:hover {
     aspect-ratio: 4 / 3;
     overflow: hidden;
     border-radius: 8px;
-    background-color: #000;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
