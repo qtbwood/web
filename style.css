@@ -928,3 +928,76 @@ a:hover {
     font-size: 0.9em;   /* 讓圖示比文字略小一點 */
     vertical-align: middle; /* 垂直對齊 (可選) */
 }
+
+/* --- 匯款資訊收合按鈕 --- */
+.payment-toggle-btn {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 1.05rem; /* 字體稍大 */
+    font-family: inherit; /* 繼承 Noto Sans TC */
+    font-weight: 500;
+    color: var(--accent-color-blue); /* 使用您的輔色 (深藍) */
+    cursor: pointer;
+    margin-top: 1.5rem; /* 與上方文字的間距 */
+    width: 100%; /* 佔滿父層寬度 */
+    
+    display: flex;
+    justify-content: space-between; /* 讓文字和箭頭左右分開 */
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.payment-toggle-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.payment-toggle-btn i:first-child {
+    margin-right: 10px; /* 錢包圖示與文字的間距 */
+}
+
+.payment-toggle-btn .icon-arrow {
+    transition: transform 0.3s ease-in-out; /* 箭頭旋轉動畫 */
+    font-size: 0.9em; /* 箭頭小一點 */
+}
+
+/* 當按鈕被點擊 (is-active) 時，旋轉箭頭 */
+.payment-toggle-btn.is-active .icon-arrow {
+    transform: rotate(180deg);
+}
+
+/* 展開的內容區塊 */
+.payment-details {
+    /* display: none; 由 JS 控制 (或 HTML 中的 inline style) */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-top: none; /* 移除頂部邊框，讓它和按鈕連在一起 */
+    border-radius: 0 0 5px 5px; /* 只有下方有圓角 */
+    padding: 1.5rem 2rem;
+    width: 100%;
+    margin-top: -1px; /* 讓邊框重疊，看起來更一體 */
+    line-height: 1.9; /* 增加行高 */
+    text-align: left; /* 強制文字靠左 (在手機版) */
+}
+
+.payment-details p {
+    margin: 0;
+    color: #333;
+}
+
+.payment-details strong {
+    color: #000;
+    min-width: 70px; /* 讓「銀行：」「帳號：」對齊 */
+    display: inline-block;
+}
+
+/* 手機版 RWD (讓按鈕和內容區塊在置中環境下也正常) */
+@media (max-width: 768px) {
+    .payment-toggle-btn,
+    .payment-details {
+        /* 在手機版 .contact-info 是 text-align: center, 
+           我們需要讓它變回區塊元素才能 100% 寬 */
+        display: block; 
+    }
+}
