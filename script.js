@@ -336,4 +336,33 @@ document.addEventListener("DOMContentLoaded", function() {
         showCase('case-1');
     }
     
+    // --- 匯款資訊收合功能 ---
+    // 獲取按鈕和內容區塊
+    const paymentBtn = document.getElementById('payment-toggle');
+    const paymentInfo = document.getElementById('payment-info');
+
+    // 檢查元素是否存在
+    if (paymentBtn && paymentInfo) {
+        
+        // 幫按鈕加上點擊事件
+        paymentBtn.addEventListener('click', function() {
+            
+            // 1. 切換按鈕的 .is-active 狀態 (用於箭頭旋轉)
+            this.classList.toggle('is-active');
+
+            // 2. 檢查 ARIA 屬性 (判斷目前是開或關)
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+            // 3. (關鍵) 切換內容的顯示/隱藏
+            if (isExpanded) {
+                // 目前是展開的 -> 關閉
+                paymentInfo.style.display = 'none';
+                this.setAttribute('aria-expanded', 'false');
+            } else {
+                // 目前是關閉的 -> 展開
+                paymentInfo.style.display = 'block';
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+    }
 });
