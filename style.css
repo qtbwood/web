@@ -929,75 +929,98 @@ a:hover {
     vertical-align: middle; /* 垂直對齊 (可選) */
 }
 
-/* --- 匯款資訊收合按鈕 --- */
-.payment-toggle-btn {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 12px 20px;
-    font-size: 1.05rem; /* 字體稍大 */
-    font-family: inherit; /* 繼承 Noto Sans TC */
-    font-weight: 500;
-    color: var(--accent-color-blue); /* 使用您的輔色 (深藍) */
-    cursor: pointer;
-    margin-top: 1.5rem; /* 與上方文字的間距 */
-    width: 100%; /* 佔滿父層寬度 */
-    
-    display: flex;
-    justify-content: space-between; /* 讓文字和箭頭左右分開 */
-    align-items: center;
-    transition: background-color 0.3s ease;
+/* --- 聯絡資訊手風琴 --- */
+
+/* 手風琴區塊的整體間距 */
+.info-accordion {
+    margin-top: 1.5rem;
 }
 
-.payment-toggle-btn:hover {
+/* 手風琴按鈕 (樣式繼承 .payment-toggle-btn) */
+.accordion-toggle {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px; /* 預設圓角 */
+    padding: 12px 20px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--accent-color-blue);
+    cursor: pointer;
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, border-radius 0.1s linear;
+    
+    /* 按鈕之間的間距 */
+    margin-top: 10px;
+}
+.info-accordion > .accordion-toggle:first-of-type {
+    margin-top: 0; /* 第一個按鈕沒有上間距 */
+}
+
+.accordion-toggle:hover {
     background-color: #f0f0f0;
 }
 
-.payment-toggle-btn i:first-child {
-    margin-right: 10px; /* 錢包圖示與文字的間距 */
+.accordion-toggle i:first-child {
+    margin-right: 10px;
 }
 
-.payment-toggle-btn .icon-arrow {
-    transition: transform 0.3s ease-in-out; /* 箭頭旋轉動畫 */
-    font-size: 0.9em; /* 箭頭小一點 */
+.accordion-toggle .icon-arrow {
+    transition: transform 0.3s ease-in-out;
+    font-size: 0.9em;
 }
 
-/* 當按鈕被點擊 (is-active) 時，旋轉箭頭 */
-.payment-toggle-btn.is-active .icon-arrow {
-    transform: rotate(180deg);
+/* 當按鈕被啟用 (is-active) 時 */
+.accordion-toggle.is-active {
+    /* 讓按鈕的 "下方" 圓角消失，與面板貼合 */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-/* 展開的內容區塊 */
-.payment-details {
-    /* display: none; 由 JS 控制 (或 HTML 中的 inline style) */
+.accordion-toggle.is-active .icon-arrow {
+    transform: rotate(180deg); /* 旋轉箭頭 */
+}
+
+/* 手風琴面板 (內容區) */
+.accordion-panel {
+    display: none; /* (*** 關鍵 ***) 預設隱藏 */
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-top: none; /* 移除頂部邊框，讓它和按鈕連在一起 */
-    border-radius: 0 0 5px 5px; /* 只有下方有圓角 */
+    border-top: none; /* 移除頂部邊框，與按鈕貼合 */
+    border-radius: 0 0 5px 5px; /* 只有下方圓角 */
     padding: 1.5rem 2rem;
     width: 100%;
-    margin-top: -1px; /* 讓邊框重疊，看起來更一體 */
-    line-height: 1.9; /* 增加行高 */
-    text-align: left; /* 強制文字靠左 (在手機版) */
+    margin-top: -1px; /* 讓邊框重疊 */
+    line-height: 1.9;
+    text-align: left; /* 保持靠左 */
 }
 
-.payment-details p {
-    margin: 0;
-    color: #333;
+/* (*** 關鍵 ***) 預設顯示的面板 */
+.accordion-panel.is-open {
+    display: block;
 }
 
-.payment-details strong {
-    color: #000;
-    min-width: 70px; /* 讓「銀行：」「帳號：」對齊 */
-    display: inline-block;
+/* 面板內的小字備註 */
+.accordion-panel .panel-note {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 0; /* 移除 p 的預設下邊距 */
 }
 
 /* 手機版 RWD (讓按鈕和內容區塊在置中環境下也正常) */
 @media (max-width: 768px) {
-    .payment-toggle-btn,
-    .payment-details {
-        /* 在手機版 .contact-info 是 text-align: center, 
-           我們需要讓它變回區塊元素才能 100% 寬 */
-        display: block; 
+    .accordion-toggle,
+    .accordion-panel {
+        display: block; /* 強制變為 block 才能 100% 寬 */
+    }
+    
+    /* 在手機上，重新顯示被隱藏的 .is-open 面板 */
+    .accordion-panel.is-open {
+        display: block;
     }
 }
