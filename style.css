@@ -955,6 +955,14 @@ a:hover {
     
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* (*** 以下為新增規則 ***) 重設 .contact-info i 帶來的樣式 */
+.info-tab-btn i {
+    color: inherit; /* 讓圖示繼承按鈕的 color 狀態 (啟用時變白) */
+    margin-right: 0;  /* 移除舊規則的 margin */
+    width: auto;      /* 移除舊規則的 width */
+    text-align: center; /* 保留置中 */
+}
+/* (*** 新增結束 ***) */
 
 /* 第一個按鈕要有左邊框 */
 .info-tab-btn:first-child {
