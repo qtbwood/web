@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // (A) 彈窗的內容資料庫
     const contactData = {
         'address': {
-            title: '<i class="fa-solid fa-location-dot"></i> 門市地址',
+            title: '<i class="fa-solid fa-location-dot"></i> 參觀地址',
             content: '<p>高雄市橋頭區通燕路中崎路路口</p>'
         },
         'phone': {
