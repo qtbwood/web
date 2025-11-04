@@ -1079,3 +1079,20 @@ a:hover {
     font-size: 0.9em;
     color: #555;
 }
+
+/* --- 修正彈窗按鈕圖示的偏移與消失 Bug --- */
+/* * 修正 PC 版圖示偏左問題：
+ * 覆蓋 .contact-info i 的舊規則 (width: 20px; margin-right: 10px;)
+*/
+.contact-icon-btn .icon-circle i {
+    width: auto;      /* (修正) 移除固定寬度 20px */
+    margin-right: 0;  /* (修正) 移除 10px 邊距 */
+}
+/* * 修正手機版圖示消失問題：
+ * 覆蓋 @media (max-width: 768px) 中 .contact-info i 的舊規則 (display: none;)
+*/
+@media (max-width: 768px) {
+    .contact-icon-btn .icon-circle i {
+        display: inline-block; /* (修正) 強制顯示圖示 */
+    }
+}
