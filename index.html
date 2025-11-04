@@ -141,40 +141,43 @@
                         <p><strong>橋頭寶台灣檜木</strong></p>
                         <p>歡迎來電預約或親臨現場，感受檜木的溫實觸感。</p>
 
-                        <div class="info-accordion" id="contact-accordion">
+                        <div class_ ="info-tabs-nav" id="info-tabs-nav">
+                            <button class="info-tab-btn is-active" data-target="panel-1" aria-label="門市地址">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </button>
+                            <button class="info-tab-btn" data-target="panel-2" aria-label="聯絡電話">
+                                <i class="fa-solid fa-phone"></i>
+                            </button>
+                            <button class="info-tab-btn" data-target="panel-3" aria-label="匯款資訊">
+                                <i class="fa-solid fa-wallet"></i>
+                            </button>
+                         </div>
+
+                         <div class="info-tabs-content">
         
-                            <button class="accordion-toggle is-active" aria-expanded="true" data-target="panel-1">
-                                <span><i class="fa-solid fa-location-dot"></i> 門市地址</span>
-                                <i class="fa-solid fa-chevron-down icon-arrow"></i>
-                            </button>
-                            <div class="accordion-panel is-open" id="panel-1">
-                                <p>高雄市橋頭區通燕路中崎路路口</p>
-                            </div>
+                              <div class_ ="info-tab-panel is-active" id="panel-1">
+                                  <h4><i class="fa-solid fa-location-dot"></i> 門市地址</h4>
+                                  <p>高雄市橋頭區通燕路中崎路路口</p>
+                              </div>
 
-                            <button class="accordion-toggle" aria-expanded="false" data-target="panel-2">
-                                <span><i class="fa-solid fa-phone"></i> 聯絡電話</span>
-                                <i class="fa-solid fa-chevron-down icon-arrow"></i>
-                            </button>
-                            <div class="accordion-panel" id="panel-2">
-                                <p>0928-677-117</p>
-                            </div>
+                              <div class="info-tab-panel" id="panel-2">
+                                  <h4><i class="fa-solid fa-phone"></i> 聯絡電話</h4>
+                                  <p>0928-677-117</p>
+                              </div>
 
-                            <button class="accordion-toggle" aria-expanded="false" data-target="panel-3">
-                                <span><i class="fa-solid fa-wallet"></i> 匯款資訊</span>
-                                <i class="fa-solid fa-chevron-down icon-arrow"></i>
-                            </button>
-                            <div class="accordion-panel" id="panel-3">
-                                <p>
-                                    <strong>銀行：</strong> 郵局代號 700<br>
-                                    <strong>帳號：</strong> 0041842 0042558<br>
-                                    <strong>戶名：</strong> 黃明華
-                               </p>
-                               <p class="panel-note">
-                                   (請於匯款後來電或傳訊告知末五碼，感謝您)
-                               </p>
-                            </div>
+                              <div class="info-tab-panel" id="panel-3">
+                                  <h4><i class="fa-solid fa-wallet"></i> 匯款資訊</h4>
+                                  <p>
+                                      <strong>銀行：</strong> (000) XXXX 銀行<br>
+                                      <strong>帳號：</strong> 1234-5678-9012-3456<br>
+                                      <strong>戶名：</strong> 王 O O
+                                  </p>
+                                  <p class="panel-note">
+                                      (請於匯款後來電或傳訊告知末五碼，感謝您)
+                                  </p>
+                              </div>
                           </div>
-                      </div>
+                      </div> /*info*/
                 </div>
             </div>
         </section>
