@@ -929,130 +929,153 @@ a:hover {
     vertical-align: middle; /* 垂直對齊 (可選) */
 }
 
-/* --- 聯絡資訊頁籤 (Tabs) --- */
-/* (A) 頁籤按鈕的容器 */
-.info-tabs-nav {
+/* --- 聯絡資訊彈窗 (Modal) --- */
+/* (A) 觸發按鈕的樣式 */
+.contact-btn-group {
     display: flex;
-    justify-content: stretch; /* 讓按鈕平分寬度 */
-    margin-top: 1.5rem;
-    gap: 0; /* 讓按鈕之間沒有空隙 */
+    justify-content: space-around; /* 讓按鈕分開 */
+    align-items: flex-start;
+    margin-top: 2rem;
+    padding: 0 1rem; /* 左右留一點空間 */
 }
 
-/* 頁籤按鈕 (純圖示) */
-.info-tab-btn {
-    flex: 1; /* 平分寬度 */
-    padding: 12px 15px; /* 調整按鈕大小 */
-    font-size: 1.3rem;  /* 放大圖示 */
-    font-family: inherit;
+.contact-icon-btn {
+    background: none;
+    border: none;
     cursor: pointer;
+    font-family: inherit;
+    color: var(--text-color);
     
+    /* 讓圖示和文字垂直排列 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 圖示和文字的間距 */
+    width: 90px; /* 固定寬度 */
+    text-align: center;
+}
+
+.contact-icon-btn .icon-circle {
+    /* (*** 關鍵 ***) 圓圓大大的 */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     background-color: #f8f8f8;
     border: 1px solid #ddd;
-    color: #888; /* 未選中時的圖示顏色 */
     
-    /* 按鈕之間的邊框 */
-    border-left-width: 0;
+    /* 讓圖示在圓圈中置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-/* (*** 以下為新增規則 ***) 重設 .contact-info i 帶來的樣式 */
-.info-tab-btn i {
-    color: inherit; /* 讓圖示繼承按鈕的 color 狀態 (啟用時變白) */
-    margin-right: 0;  /* 移除舊規則的 margin */
-    width: auto;      /* 移除舊規則的 width */
-    text-align: center; /* 保留置中 */
-}
-/* (*** 新增結束 ***) */
-
-/* 第一個按鈕要有左邊框 */
-.info-tab-btn:first-child {
-    border-left-width: 1px;
-    border-top-left-radius: 5px; /* 左上圓角 */
+    font-size: 1.5rem; /* 放大圖示 */
+    color: var(--accent-color-blue);
+    
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 最後一個按鈕 */
-.info-tab-btn:last-child {
-    border-top-right-radius: 5px; /* 右上圓角 */
+.contact-icon-btn:hover .icon-circle {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.info-tab-btn:hover {
-    background-color: #f0f0f0;
-    color: #333;
+.contact-icon-btn .icon-label {
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-/* (*** 關鍵 ***) 選中狀態的按鈕 */
-.info-tab-btn.is-active {
-    background-color: var(--accent-color-blue); /* 使用您的輔色 (深藍) */
-    color: #ffffff; /* 圖示變白色 */
-    border-color: var(--accent-color-blue);
-    position: relative;
-    z-index: 2; /* 讓它蓋在內容區塊之上 */
-}
+/* (B) 彈窗 (Modal) 本體樣式 */
 
-/* (B) 頁籤內容的容器 */
-.info-tabs-content {
-    position: relative;
+.info-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    margin-top: -1px; /* 讓內容區塊的邊框與按鈕重疊 */
-}
-
-/* 頁籤內容面板 */
-.info-tab-panel {
-    display: none; /* (*** 關鍵 ***) 預設隱藏 */
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 0 0 5px 5px; /* 只有下方圓角 */
-    padding: 1.5rem 2rem;
-    line-height: 1.9;
-    text-align: left; /* 保持靠左 */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 遮罩 */
+    z-index: 2000;
     
-    /* (*** 關鍵 ***) 
-       確保 .is-active 的按鈕下方邊框不會被遮住 */
-    border-top: 1px solid #ddd;
+    /* 預設隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
 }
 
-/* (*** 關鍵 ***) 顯示的面板 */
-.info-tab-panel.is-active {
-    display: block;
-    z-index: 1;
+.info-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 90%;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 2001;
+
+    /* 預設隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -40%); /* 增加一點動畫感 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* 內容面板裡的標題 (h4) */
-.info-tab-panel h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 1rem;
+/* 彈窗 "開啟" 時的狀態 */
+.info-modal-overlay.is-visible,
+.info-modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+.info-modal.is-visible {
+    transform: translate(-50%, -50%);
+}
+
+/* 彈窗：關閉按鈕 */
+.info-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+.info-modal-close:hover {
+    color: #000;
+}
+
+/* 彈窗：標題 */
+.info-modal-header {
+    padding: 1.5rem 2rem;
     border-bottom: 1px solid #eee;
-    padding-bottom: 0.5rem;
 }
-.info-tab-panel h4 i {
-    margin-right: 8px;
+.info-modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
     color: var(--accent-color-blue);
 }
 
-/* 內容面板裡的小字備註 */
-.info-tab-panel .panel-note {
+/* 彈窗：內容 */
+.info-modal-body {
+    padding: 1.5rem 2rem;
+    line-height: 1.9;
+    text-align: left;
+}
+.info-modal-body p {
+    margin: 0;
+}
+.info-modal-body strong {
+    color: #000;
+    min-width: 70px;
+    display: inline-block;
+}
+/* 匯款資訊的小字 */
+.info-modal-body .panel-note {
     margin-top: 10px;
     font-size: 0.9em;
     color: #555;
-    margin-bottom: 0;
-}
-
-/* 修正手機版置中問題 */
-@media (max-width: 768px) {
-    .info-tabs-nav,
-    .info-tabs-content {
-        display: block; /* 強制變為 block 才能 100% 寬 */
-        width: 100%;
-    }
-    
-    .info-tabs-nav {
-        display: flex; /* 在手機上仍然保持 flex 橫排 */
-    }
-
-    .info-tab-panel.is-active {
-        display: block; /* 確保在手機上也能正常顯示 */
-    }
 }
