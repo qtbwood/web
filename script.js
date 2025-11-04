@@ -336,43 +336,44 @@ document.addEventListener("DOMContentLoaded", function() {
         showCase('case-1');
     }
     
-    // --- 聯絡資訊手風琴功能 ---
-    const accordionContainer = document.getElementById('contact-accordion');
-    
-    if (accordionContainer) {
+    // --- 聯絡資訊頁籤 (Tabs) 功能 ---
+    // 獲取 "所有" 的頁籤按鈕
+    const infoTabButtons = document.querySelectorAll('.info-tab-btn');
+    // 獲取 "所有" 的內容面板
+    const infoTabPanels = document.querySelectorAll('.info-tab-panel');
+
+    // 檢查按鈕是否存在
+    if (infoTabButtons.length > 0 && infoTabPanels.length > 0) {
         
-        // 獲取 "所有" 的切換按鈕
-        const allToggles = accordionContainer.querySelectorAll('.accordion-toggle');
-
-        allToggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
+        // 為 "每一個" 按鈕加上點擊事件
+        infoTabButtons.forEach(button => {
+            button.addEventListener('click', function() {
                 
-                const targetPanelId = this.dataset.target;
-                const targetPanel = document.getElementById(targetPanelId);
-
-                // 檢查點擊的是否是已經打開的
-                const isAlreadyOpen = this.classList.contains('is-active');
-
-                // (A) 先關閉 "所有" 按鈕和面板
-                allToggles.forEach(t => {
-                    t.classList.remove('is-active');
-                    t.setAttribute('aria-expanded', 'false');
+                // 獲取點擊按鈕的 data-target 屬性 (例如 "panel-1")
+                const targetId = this.dataset.target;
+                
+                // (A) 移除 "所有" 按鈕的 .is-active 狀態
+                infoTabButtons.forEach(btn => {
+                    btn.classList.remove('is-active');
+                    btn.setAttribute('aria-expanded', 'false');
                 });
-                accordionContainer.querySelectorAll('.accordion-panel').forEach(p => {
-                    p.classList.remove('is-open');
-                    p.style.display = 'none'; // 隱藏所有面板
+                
+                // (B) 隱藏 "所有" 內容面板
+                infoTabPanels.forEach(panel => {
+                    panel.classList.remove('is-active');
+                    panel.style.display = 'none';
                 });
-
-                // (B) 如果點擊的不是剛才那個，就打開 "這一個"
-                if (!isAlreadyOpen && targetPanel) {
-                    this.classList.add('is-active');
-                    this.setAttribute('aria-expanded', 'true');
-                    targetPanel.classList.add('is-open');
-                    targetPanel.style.display = 'block'; // 顯示目標面板
+                
+                // (C) 將 "當前點擊" 的按鈕設為 .is-active
+                this.classList.add('is-active');
+                this.setAttribute('aria-expanded', 'true');
+                
+                // (D) 顯示 "目標" 內容面板
+                const targetPanel = document.getElementById(targetId);
+                if (targetPanel) {
+                    targetPanel.classList.add('is-active');
+                    targetPanel.style.display = 'block';
                 }
-                
-                // 如果點擊的是已打開的，(A) 步驟已經把它關閉了，
-                // 這樣就達成了 "點擊已開啟的項目可將其關閉" 的效果。
             });
         });
     }
