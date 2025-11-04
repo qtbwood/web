@@ -336,45 +336,77 @@ document.addEventListener("DOMContentLoaded", function() {
         showCase('case-1');
     }
     
-    // --- 聯絡資訊頁籤 (Tabs) 功能 ---
-    // 獲取 "所有" 的頁籤按鈕
-    const infoTabButtons = document.querySelectorAll('.info-tab-btn');
-    // 獲取 "所有" 的內容面板
-    const infoTabPanels = document.querySelectorAll('.info-tab-panel');
+// --- 6. (*** 全新 ***) 聯絡資訊彈窗 (Modal) 功能 ---
 
-    // 檢查按鈕是否存在
-    if (infoTabButtons.length > 0 && infoTabPanels.length > 0) {
+    // (A) 彈窗的內容資料庫
+    const contactData = {
+        'address': {
+            title: '<i class="fa-solid fa-location-dot"></i> 門市地址',
+            content: '<p>高雄市橋頭區通燕路中崎路路口</p>'
+        },
+        'phone': {
+            title: '<i class="fa-solid fa-phone"></i> 聯絡電話',
+            content: '<p>0928-677-117</p>'
+        },
+        'wallet': {
+            title: '<i class="fa-solid fa-wallet"></i> 匯款資訊',
+            content: `
+                <p>
+                    <strong>銀行：</strong> 郵局代號 700<br>
+                    <strong>帳號：</strong> 0041842 0042558<br>
+                    <strong>戶名：</strong> 黃明華
+                </p>
+                <p class="panel-note">
+                    (請於匯款後來電或傳訊告知末五碼，感謝您)
+                </p>
+            `
+        }
+    };
+
+    // (B) 獲取 DOM 元素
+    const triggerButtons = document.querySelectorAll('.contact-icon-btn');
+    const modalOverlay = document.getElementById('info-modal-overlay');
+    const modal = document.getElementById('info-modal');
+    const modalCloseBtn = document.getElementById('info-modal-close');
+    const modalTitle = document.getElementById('info-modal-title');
+    const modalBody = document.getElementById('info-modal-body');
+
+    if (modalOverlay && modal && modalCloseBtn && triggerButtons.length > 0) {
+
+        // (C) 功能：開啟彈窗
+        function openModal(key) {
+            const data = contactData[key];
+            if (!data) return; // 如果找不到資料，就中斷
+
+            // 1. 填入內容
+            modalTitle.innerHTML = data.title;
+            modalBody.innerHTML = data.content;
+
+            // 2. 顯示
+            modalOverlay.classList.add('is-visible');
+            modal.classList.add('is-visible');
+        }
+
+        // (D) 功能：關閉彈窗
+        function closeModal() {
+            modalOverlay.classList.remove('is-visible');
+            modal.classList.remove('is-visible');
+        }
+
+        // (E) 綁定事件
         
-        // 為 "每一個" 按鈕加上點擊事件
-        infoTabButtons.forEach(button => {
+        // 1. 綁定所有觸發按鈕
+        triggerButtons.forEach(button => {
             button.addEventListener('click', function() {
-                
-                // 獲取點擊按鈕的 data-target 屬性 (例如 "panel-1")
-                const targetId = this.dataset.target;
-                
-                // (A) 移除 "所有" 按鈕的 .is-active 狀態
-                infoTabButtons.forEach(btn => {
-                    btn.classList.remove('is-active');
-                    btn.setAttribute('aria-expanded', 'false');
-                });
-                
-                // (B) 隱藏 "所有" 內容面板
-                infoTabPanels.forEach(panel => {
-                    panel.classList.remove('is-active');
-                    panel.style.display = 'none';
-                });
-                
-                // (C) 將 "當前點擊" 的按鈕設為 .is-active
-                this.classList.add('is-active');
-                this.setAttribute('aria-expanded', 'true');
-                
-                // (D) 顯示 "目標" 內容面板
-                const targetPanel = document.getElementById(targetId);
-                if (targetPanel) {
-                    targetPanel.classList.add('is-active');
-                    targetPanel.style.display = 'block';
-                }
+                const targetKey = this.dataset.target;
+                openModal(targetKey);
             });
         });
+
+        // 2. 綁定關閉按鈕 (X)
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        // 3. 綁定遮罩 (點擊背景關閉)
+        modalOverlay.addEventListener('click', closeModal);
     }
 });
