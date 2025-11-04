@@ -336,33 +336,44 @@ document.addEventListener("DOMContentLoaded", function() {
         showCase('case-1');
     }
     
-    // --- 匯款資訊收合功能 ---
-    // 獲取按鈕和內容區塊
-    const paymentBtn = document.getElementById('payment-toggle');
-    const paymentInfo = document.getElementById('payment-info');
-
-    // 檢查元素是否存在
-    if (paymentBtn && paymentInfo) {
+    // --- 聯絡資訊手風琴功能 ---
+    const accordionContainer = document.getElementById('contact-accordion');
+    
+    if (accordionContainer) {
         
-        // 幫按鈕加上點擊事件
-        paymentBtn.addEventListener('click', function() {
-            
-            // 1. 切換按鈕的 .is-active 狀態 (用於箭頭旋轉)
-            this.classList.toggle('is-active');
+        // 獲取 "所有" 的切換按鈕
+        const allToggles = accordionContainer.querySelectorAll('.accordion-toggle');
 
-            // 2. 檢查 ARIA 屬性 (判斷目前是開或關)
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        allToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                
+                const targetPanelId = this.dataset.target;
+                const targetPanel = document.getElementById(targetPanelId);
 
-            // 3. (關鍵) 切換內容的顯示/隱藏
-            if (isExpanded) {
-                // 目前是展開的 -> 關閉
-                paymentInfo.style.display = 'none';
-                this.setAttribute('aria-expanded', 'false');
-            } else {
-                // 目前是關閉的 -> 展開
-                paymentInfo.style.display = 'block';
-                this.setAttribute('aria-expanded', 'true');
-            }
+                // 檢查點擊的是否是已經打開的
+                const isAlreadyOpen = this.classList.contains('is-active');
+
+                // (A) 先關閉 "所有" 按鈕和面板
+                allToggles.forEach(t => {
+                    t.classList.remove('is-active');
+                    t.setAttribute('aria-expanded', 'false');
+                });
+                accordionContainer.querySelectorAll('.accordion-panel').forEach(p => {
+                    p.classList.remove('is-open');
+                    p.style.display = 'none'; // 隱藏所有面板
+                });
+
+                // (B) 如果點擊的不是剛才那個，就打開 "這一個"
+                if (!isAlreadyOpen && targetPanel) {
+                    this.classList.add('is-active');
+                    this.setAttribute('aria-expanded', 'true');
+                    targetPanel.classList.add('is-open');
+                    targetPanel.style.display = 'block'; // 顯示目標面板
+                }
+                
+                // 如果點擊的是已打開的，(A) 步驟已經把它關閉了，
+                // 這樣就達成了 "點擊已開啟的項目可將其關閉" 的效果。
+            });
         });
     }
 });
