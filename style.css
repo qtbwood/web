@@ -929,98 +929,122 @@ a:hover {
     vertical-align: middle; /* 垂直對齊 (可選) */
 }
 
-/* --- 聯絡資訊手風琴 --- */
-
-/* 手風琴區塊的整體間距 */
-.info-accordion {
+/* --- 聯絡資訊頁籤 (Tabs) --- */
+/* (A) 頁籤按鈕的容器 */
+.info-tabs-nav {
+    display: flex;
+    justify-content: stretch; /* 讓按鈕平分寬度 */
     margin-top: 1.5rem;
+    gap: 0; /* 讓按鈕之間沒有空隙 */
 }
 
-/* 手風琴按鈕 (樣式繼承 .payment-toggle-btn) */
-.accordion-toggle {
+/* 頁籤按鈕 (純圖示) */
+.info-tab-btn {
+    flex: 1; /* 平分寬度 */
+    padding: 12px 15px; /* 調整按鈕大小 */
+    font-size: 1.3rem;  /* 放大圖示 */
+    font-family: inherit;
+    cursor: pointer;
+    
     background-color: #f8f8f8;
     border: 1px solid #ddd;
-    border-radius: 5px; /* 預設圓角 */
-    padding: 12px 20px;
-    font-size: 1.05rem;
-    font-family: inherit;
-    font-weight: 500;
-    color: var(--accent-color-blue);
-    cursor: pointer;
-    width: 100%;
+    color: #888; /* 未選中時的圖示顏色 */
     
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease, border-radius 0.1s linear;
+    /* 按鈕之間的邊框 */
+    border-left-width: 0;
     
-    /* 按鈕之間的間距 */
-    margin-top: 10px;
-}
-.info-accordion > .accordion-toggle:first-of-type {
-    margin-top: 0; /* 第一個按鈕沒有上間距 */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.accordion-toggle:hover {
+/* 第一個按鈕要有左邊框 */
+.info-tab-btn:first-child {
+    border-left-width: 1px;
+    border-top-left-radius: 5px; /* 左上圓角 */
+}
+
+/* 最後一個按鈕 */
+.info-tab-btn:last-child {
+    border-top-right-radius: 5px; /* 右上圓角 */
+}
+
+.info-tab-btn:hover {
     background-color: #f0f0f0;
+    color: #333;
 }
 
-.accordion-toggle i:first-child {
-    margin-right: 10px;
+/* (*** 關鍵 ***) 選中狀態的按鈕 */
+.info-tab-btn.is-active {
+    background-color: var(--accent-color-blue); /* 使用您的輔色 (深藍) */
+    color: #ffffff; /* 圖示變白色 */
+    border-color: var(--accent-color-blue);
+    position: relative;
+    z-index: 2; /* 讓它蓋在內容區塊之上 */
 }
 
-.accordion-toggle .icon-arrow {
-    transition: transform 0.3s ease-in-out;
-    font-size: 0.9em;
+/* (B) 頁籤內容的容器 */
+.info-tabs-content {
+    position: relative;
+    width: 100%;
+    margin-top: -1px; /* 讓內容區塊的邊框與按鈕重疊 */
 }
 
-/* 當按鈕被啟用 (is-active) 時 */
-.accordion-toggle.is-active {
-    /* 讓按鈕的 "下方" 圓角消失，與面板貼合 */
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.accordion-toggle.is-active .icon-arrow {
-    transform: rotate(180deg); /* 旋轉箭頭 */
-}
-
-/* 手風琴面板 (內容區) */
-.accordion-panel {
+/* 頁籤內容面板 */
+.info-tab-panel {
     display: none; /* (*** 關鍵 ***) 預設隱藏 */
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-top: none; /* 移除頂部邊框，與按鈕貼合 */
     border-radius: 0 0 5px 5px; /* 只有下方圓角 */
     padding: 1.5rem 2rem;
-    width: 100%;
-    margin-top: -1px; /* 讓邊框重疊 */
     line-height: 1.9;
     text-align: left; /* 保持靠左 */
+    
+    /* (*** 關鍵 ***) 
+       確保 .is-active 的按鈕下方邊框不會被遮住 */
+    border-top: 1px solid #ddd;
 }
 
-/* (*** 關鍵 ***) 預設顯示的面板 */
-.accordion-panel.is-open {
+/* (*** 關鍵 ***) 顯示的面板 */
+.info-tab-panel.is-active {
     display: block;
+    z-index: 1;
 }
 
-/* 面板內的小字備註 */
-.accordion-panel .panel-note {
+/* 內容面板裡的標題 (h4) */
+.info-tab-panel h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+.info-tab-panel h4 i {
+    margin-right: 8px;
+    color: var(--accent-color-blue);
+}
+
+/* 內容面板裡的小字備註 */
+.info-tab-panel .panel-note {
     margin-top: 10px;
     font-size: 0.9em;
     color: #555;
-    margin-bottom: 0; /* 移除 p 的預設下邊距 */
+    margin-bottom: 0;
 }
 
-/* 手機版 RWD (讓按鈕和內容區塊在置中環境下也正常) */
+/* 修正手機版置中問題 */
 @media (max-width: 768px) {
-    .accordion-toggle,
-    .accordion-panel {
+    .info-tabs-nav,
+    .info-tabs-content {
         display: block; /* 強制變為 block 才能 100% 寬 */
+        width: 100%;
     }
     
-    /* 在手機上，重新顯示被隱藏的 .is-open 面板 */
-    .accordion-panel.is-open {
-        display: block;
+    .info-tabs-nav {
+        display: flex; /* 在手機上仍然保持 flex 橫排 */
+    }
+
+    .info-tab-panel.is-active {
+        display: block; /* 確保在手機上也能正常顯示 */
     }
 }
