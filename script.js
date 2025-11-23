@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- 3. Gallery Modal 資料庫與邏輯 ---
     const casesData = {
         'case-1': {
-            title: '台灣檜木方桌 - 溫潤重現',
+            title: '檜木方桌 - 溫潤重現',
             description: `<p>這組經典的檜木方桌，我們採用除漆工法，保留了老木頭經歷歲月留下的自然痕跡。</p>
                           <p><strong>修復重點：</strong></p>
                           <ul>
