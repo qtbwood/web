@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                           <p><strong>修復重點：</strong></p>
                           <ul>
                             <li>手工細緻除漆，不傷木質</li>
-                            <li>結構榫接補強</li>
+                            <li>結構補強、桌面開縫拼接</li>
                             <li>使用護木漆塗裝</li>
                           </ul>`,
             images: ['img/a1.jpg', 'img/a2.jpg', 'img/a3.jpg', 'img/a4.jpg', 'img/a5.jpg', 'img/a6.jpg', 'img/a7.jpg', 'img/a8.jpg']
