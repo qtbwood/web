@@ -130,10 +130,15 @@ document.addEventListener("DOMContentLoaded", function() {
         function updateCarousel() {
             if(cards.length === 0) return;
 
-            // 重新抓取寬度 (避免 Resize 或載入延遲導致數值錯誤)
-            const cardWidth = cards[0].getBoundingClientRect().width;
+            // [修正重點] 改用 offsetWidth，抓取卡片「未縮放前」的真實寬度
+            // 這樣計算滑動距離才會準確，不會因為 CSS 的 scale 效果產生誤差
+            const cardWidth = cards[0].offsetWidth; 
+            
             const container = document.querySelector('.spotlight-track-container');
-            const trackWidth = container.getBoundingClientRect().width;
+            
+            // 這裡也要改用 offsetWidth 比較保險，雖然 container 通常沒縮放
+            const trackWidth = container.offsetWidth; 
+            
             const gap = 20; // CSS gap: 20px
             
             // 計算置中偏移：(容器寬 - 卡片寬) / 2
@@ -156,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            // 更新進度條
+            // 更新進度條 (如果有保留的話)
             if(progressBar) {
                 const progress = ((currentIndex + 1) / cards.length) * 100;
                 progressBar.style.width = `${progress}%`;
