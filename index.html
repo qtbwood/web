@@ -4,195 +4,288 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>橋頭寶台灣檜木</title>
-    <meta name="description" content="橋頭寶台灣檜木專注於檜木老件新生與傢俱修復。提供代客除漆、舊材或老傢俱買賣、老傢俱整理服務，讓佈滿塵埃的老件恢復往日的光彩與溫潤。">
-    <meta property="og:title" content="橋頭寶台灣檜木 | 老件新生 老傢俱修復買賣">
-    <meta property="og:description" content="專注於檜木老件新生與傢俱修復，提供代客除漆、舊材或老傢俱買賣、老傢俱整理服務。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://qtbwood.github.io/web/index.html">
-    <meta property="og:image" content="https://qtbwood.github.io/web/img/2.png">
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="橋頭寶台灣檜木-專注於檜木老件新生與傢俱修復。賦予老木料新的生命，續寫木頭與人之間的情感連結。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="container header-container">
-            
-            <button class="nav-open-btn" id="nav-open-btn" aria-label="開啟選單">
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">
+                <span class="logo-text">橋頭寶台灣檜木</span>
+            </a>
+            <div class="nav-toggle" id="nav-toggle">
                 <i class="fa-solid fa-bars"></i>
-            </button>
-            
-            <a href="#home" class="site-logo">
-                <img src="img/0.png" alt="橋頭寶台灣檜木 Logo">
-            </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="nav-link active-link">首頁</a></li>
+                <li><a href="#about" class="nav-link">關於我們</a></li>
+                <li><a href="#masterpiece" class="nav-link">珍藏藝品</a></li>
+                <li><a href="#gallery" class="nav-link">修復紀實</a></li>
+                <li><a href="#services" class="nav-link">服務項目</a></li>
+                <li><a href="#contact" class="nav-link">聯絡資訊</a></li>
+            </ul>
+        </div>
+    </nav>
 
-            <nav class="site-navigation" id="mobile-nav">
-                
-                <button class="nav-close-btn" id="nav-close-btn" aria-label="關閉選單">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-                
-                <ul>
-                    <li><a href="#home" class="active">首頁</a></li>
-                    <li><a href="#about">關於我們</a></li>
-                    <li><a href="#restoration">老件新生</a></li>
-                    <li class="nav-sub-item"><a href="gallery.html">整理紀實</a></li>
-                    <li><a href="#services">服務介紹</a></li>
-                    <li><a href="#contact">蒞臨指教</a></li>
-                </ul>
-            </nav>
+    <section class="hero" id="hero">
+        <div class="hero-bg-layer">
+            <img src="img/8.jpg" alt="檜木工藝藍圖" class="blueprint-bg">
+            <div class="bg-overlay"></div>
         </div>
 
-        <div class="mobile-menu-overlay" id="menu-overlay"></div>
-
-    </header>
-
-    <main>
-
-        <section class="hero-section" id="home">
-            <div class="hero-carousel">
-                <div class="slide active">
-                    <img src="img/6.png" alt="老件女兒椅_整理">
-                </div>
-                <div class="slide">
-                    <img src="img/1.jpg" alt="老件置物櫃_整理">
-                </div>
-                <div class="slide">
-                    <img src="img/2.png" alt="老件梳妝台_整理">
-                </div>
-                <div class="slide">
-                    <img src="img/3.jpg" alt="老件中小置物櫃_整理">
-                </div>
-                <div class="slide">
-                    <img src="img/7.jpg" alt="小柑仔店櫥_新做">
+        <div class="container hero-content">
+            <div class="hero-text-panel">
+                <h1 class="hero-title">
+                    歲月洗鍊<span class="dot">・</span>檜木新生
+                </h1>
+                <p class="hero-subtitle">
+                    每一件老傢俱，都是時間的工程圖。<br>
+                    我們透過修復工藝，重現靈魂的溫潤光澤。
+                </p>
+                <div class="hero-btns">
+                    <a href="#gallery" class="btn btn-outline-gold">
+                        <i class="fa-solid fa-magnifying-glass"></i> 查看修復紀實
+                    </a>
                 </div>
             </div>
+        </div>
+        
+        <div class="scroll-down">
+            <span>SCROLL</span>
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+    </section>
 
-            <div class="carousel-pagination">
-                <span class="dot active">
-                    <span class="dot-fill"></span>
-                </span>
-                <span class="dot">
-                    <span class="dot-fill"></span>
-                </span>
-                <span class="dot">
-                    <span class="dot-fill"></span>
-                </span>
-                <span class="dot">
-                    <span class="dot-fill"></span>
-                </span>
-                <span class="dot">
-                    <span class="dot-fill"></span>
-                </span>
+    <section class="section about" id="about">
+        <div class="container grid-2">
+            <div class="about-img-box">
+                <img src="img/5.png" alt="職人精神" class="feature-img">
+                <div class="pattern-overlay"></div>
             </div>
-            
-        </section>
-
-        <section class="content-section" id="about">
-            <div class="container text-center">
-                <h2><i class="fa-solid fa-store"></i> 關於我們</h2>
-                <p class="intro-text">我們相信，每一件老傢俱都有它的故事。我們致力於修復老傢俱，賦予老木料新的生命，續寫木頭與人之間的情感連結。</p>
-                <a href="#restoration" class="btn">探索我們的工藝 ></a>
+            <div class="about-data">
+                <h2 class="section-title">職人精神<br>延續情感</h2>
+                <p class="section-text">
+                    舊時代的檜木傢俱，承載著家族的記憶。<br><br>
+                    橋頭寶台灣檜木相信，修復不僅是修補物件，更是修補歲月的痕跡。我們提供代客除漆、老傢俱整理服務，堅持保留老件的靈魂，同時賦予其適應現代生活的美感。
+                </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="content-section bg-light" id="restoration">
-            <div class="container two-column">
-                <div class="image-content">
-                    <img src="img/4.png" alt="檜木老件整理新生流程">
-                </div>
-                <div class="text-content">
-                    <h2>老件新生 (Restoration)</h2>
-                    <p>舊時代的檜木傢俱，承載著家族的記憶。我們專注於修復與整理，讓佈滿塵埃的老件恢復往日的光彩與溫潤。</p>
-                    <a href="gallery.html" class="btn-link">查看整理紀實></a>
-                </div>
+    <section class="section masterpiece-section" id="masterpiece">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title light">物件欣賞</h2>
+                <p class="section-subtitle light-text">已售物品，見證工藝的極致</p>
             </div>
-        </section>
 
-        <section class="content-section" id="services">
-            <div class="container two-column reverse">
-                <div class="image-content">
-                    <img src="img/5.png" alt="服務介紹 - 檜木高櫃">
-                </div>
-                <div class="text-content">
-                    <h2>服務介紹 (Our Services)</h2>
+            <div class="spotlight-carousel-wrapper">
+                <button class="spotlight-btn prev" id="spotlight-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="spotlight-btn next" id="spotlight-next"><i class="fa-solid fa-chevron-right"></i></button>
+                
+                <div class="spotlight-track-container">
+                    <ul class="spotlight-track" id="spotlight-track">
+                        
+                        <li class="spotlight-card">
+                            <div class="card-image">
+                                <img src="img/1.jpg" alt="經典檜木置物櫃">
+                            </div>
+                            <div class="card-info">
+                                <h3>經典檜木・置物櫃</h3>
+                                <p>結構完整 / 溫潤木紋</p>
+                            </div>
+                        </li>
 
-                    <ul class="service-list">
-                        <li>代客除漆</li>
-                        <li>整理老傢俱 (家具)</li>
-                        <li>舊材買賣</li>
-                        <li>各式菜櫥櫃、紅眠床、中藥櫃、飯斗櫃..等</li>
+                        <li class="spotlight-card">
+                            <div class="card-image">
+                                <img src="img/2.jpg" alt="老件梳妝台">
+                            </div>
+                            <div class="card-info">
+                                <h3>復古風華・梳妝台</h3>
+                                <p>精緻雕花 / 工藝歷史</p>
+                            </div>
+                        </li>
+
+                        <li class="spotlight-card">
+                            <div class="card-image">
+                                <img src="img/3.jpg" alt="玻璃收納櫃">
+                            </div>
+                            <div class="card-info">
+                                <h3>透視美學・收納櫃</h3>
+                                <p>玻璃櫥窗 / 簡約典雅</p>
+                            </div>
+                        </li>
+                        
+                        <li class="spotlight-card">
+                            <div class="card-image">
+                                <img src="img/6.png" alt="檜木女兒椅">
+                            </div>
+                            <div class="card-info">
+                                <h3>傳承記憶・女兒椅</h3>
+                                <p>穩固榫接 / 舒適座感</p>
+                            </div>
+                        </li>
+
                     </ul>
-                    <p class="service-delivery">
-                        回頭車代送本島範圍；也可以親送!
-                    </p>
+                </div>
+
+                <div class="spotlight-progress">
+                    <div class="progress-bar" id="spotlight-bar"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="content-section bg-light" id="contact">
-            <div class="container">
-                <h2 class="text-center">蒞臨指教 (Visit Us)</h2>
-                <div class="contact-grid">
-                    <div class="map-placeholder">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d459.8843714156486!2d120.31877851566661!3d22.762598836804333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e0e40277233a9%3A0xd511bbedfe5c2644!2z5qmL6aCt5a-25Y-w54Gj5qqc5pyo!5e0!3m2!1szh-TW!2stw!4v1761231661449!5m2!1szh-TW!2stw" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div class="contact-info">
-                        <p><strong>橋頭寶台灣檜木</strong></p>
-                        <p>歡迎來電預約或親臨現場，感受檜木的溫實觸感。</p>
+    <section class="section gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">修復紀實與現貨</h2>
+                <p class="section-subtitle">見證老件新生，或尋找屬於您的檜木傢俱</p>
+            </div>
 
-                        <div class="contact-btn-group">
-        
-                            <button class="contact-icon-btn" data-target="address" aria-label="參觀地址">
-                               <span class="icon-circle"><i class="fa-solid fa-location-dot"></i></span>
-                               <span class="icon-label">參觀地址</span>
-                            </button>
-        
-                            <button class="contact-icon-btn" data-target="phone" aria-label="聯絡電話">
-                               <span class="icon-circle"><i class="fa-solid fa-phone"></i></span>
-                               <span class="icon-label">聯絡電話</span>
-                            </button>
-
-                            <button class="contact-icon-btn" data-target="wallet" aria-label="匯款資訊">
-                               <span class="icon-circle"><i class="fa-solid fa-wallet"></i></span>
-                               <span class="icon-label">匯款資訊</span>
-                            </button>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item restoration-card" data-id="case-1">
+                    <div class="gallery-thumb">
+                        <img src="img/a0.jpg" alt="檜木方桌修復前後">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <h3>檜木方桌修復</h3>
+                                <p class="action-text">查看完整過程</p>
+                            </div>
                         </div>
-                     </div>
-                    
+                        <span class="card-badge restoration">Restoration</span>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <div class="info-modal-overlay" id="info-modal-overlay"></div>
-        <div class="info-modal" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
-            
-            <button class="info-modal-close" id="info-modal-close" aria-label="關閉">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <div class="info-modal-header">
-                <h3 id="info-modal-title"></h3>
-            </div>
-            
-            <div class="info-modal-body" id="info-modal-body">
-                </div>
-        </div>
-    </main>
 
-    <footer class="site-footer">
-        <div class="social-icons-wrapper">
-            <a href="https://www.facebook.com/profile.php?id=100057663481009" target="_blank" class="icon-link icon-fb" aria-label="Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.ruten.com.tw/store/v2sniper/" target="_blank" class="icon-link icon-ruten" aria-label="Ruten">
-                <span>露</span>
-            </a>
-            <div class="footer-qrcode">
-                <img src="img/qtb.png" alt="QR Code">
+                <a href="https://www.ruten.com.tw/store/v2sniper/" target="_blank" class="gallery-item shop-card">
+                    <div class="gallery-thumb">
+                        <img src="img/1.jpg" alt="前往賣場">
+                        <div class="gallery-overlay static-overlay">
+                            <div class="overlay-content">
+                                <i class="fa-solid fa-store"></i>
+                                <h3 style="font-size: 2rem;">more.. 露天</h3>
+                                <p class="action-text">前往賣場尋寶</p>
+                            </div>
+                        </div>
+                        <span class="card-badge shop">On Sale</span>
+                    </div>
+                </a>
+
             </div>
         </div>
-        <p class="copyright">© 2025 橋頭寶台灣檜木. All Rights Reserved. Gemini</p>
+    </section>
+
+    <section class="section services-section" id="services">
+        <div class="container">
+            <h2 class="section-title text-center">服務項目</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+                    <h3>代客除漆</h3>
+                    <p>專業工法去除表面舊漆，讓檜木毛細孔重新呼吸，展現天然紋理。</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fa-solid fa-chair"></i></div>
+                    <h3>老傢俱整理</h3>
+                    <p>結構補強、外觀修整、上護木漆、護木蠟，讓老傢俱重獲新生，堅固耐用。</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fa-solid fa-tree"></i></div>
+                    <h3>舊材買賣</h3>
+                    <p>台灣檜木板材舊料買賣，賦予老木材新的用途與價值。</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>運送服務</h3>
+                    <p>提供回頭車代送全台服務，或可親自送達，確保物件安全。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+        <div class="container grid-2-contact">
+            <div class="contact-info">
+                <h2 class="section-title light">蒞臨指教</h2>
+                <p class="contact-desc">歡迎來電預約參觀，親手觸摸檜木的溫度。</p>
+                <ul class="contact-list">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div><strong>地址</strong><p>高雄市橋頭區通燕路中崎路路口</p></div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <div><strong>電話</strong><p>0928-677-117 (黃先生)</p></div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-clock"></i>
+                        <div><strong>參訪時間</strong><p>遠途請先來電確認</p></div>
+                    </li>
+                </ul>
+
+                <div class="bank-accordion" id="bank-accordion">
+                    <div class="bank-header">
+                        <h4><i class="fa-solid fa-wallet"></i> 匯款資訊</h4>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </div>
+                    
+                    <div class="bank-content">
+                        <div class="bank-details">
+                            <p class="bank-row">
+                                <span class="label">銀行代號</span>
+                                <span class="value">700 (郵局)</span>
+                            </p>
+                            <p class="bank-row">
+                                <span class="label">匯款帳號</span>
+                                <span class="value highlight">0041842 0042558</span>
+                            </p>
+                            <p class="bank-row">
+                                <span class="label">收款戶名</span>
+                                <span class="value">黃明華</span>
+                            </p>
+                            <p class="bank-note">( 匯款後請來電或傳訊告知末五碼 )</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100057663481009" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.ruten.com.tw/store/v2sniper/" target="_blank" class="ruten-link">露</a>
+                </div>
+            </div>
+            <div class="map-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d459.8843714156486!2d120.31877851566661!3d22.762598836804333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e0e40277233a9%3A0xd511bbedfe5c2644!2z5qmL6aCt5a-25Y-w54Gj5qqc5pyo!5e0!3m2!1szh-TW!2stw!4v1761231661449!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="copyright">© 2025 橋頭寶台灣檜木. All Rights Reserved.</p>
     </footer>
+
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body grid-2-modal">
+                <div class="modal-gallery">
+                    <div class="main-img-container"><img src="" alt="案件展示" id="modal-main-img"></div>
+                    <div class="thumb-list" id="modal-thumbs"></div>
+                </div>
+                <div class="modal-text">
+                    <h3 id="modal-title"></h3>
+                    <div class="modal-desc" id="modal-desc"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
