@@ -286,7 +286,11 @@ a.gallery-item { display: block; color: inherit; }
     }
     .nav-menu.show { right: 0; }
     .nav-toggle { display: block; }
-    .blueprint-bg { object-position: center 20%; opacity: 0.7; }
+    .blueprint-bg { 
+        object-position: center center; /* 改回置中 */
+        object-fit: cover; /* [關鍵] 改成 cover，讓直式圖片填滿整個手機螢幕 */
+        opacity: 0.7; 
+    }
     .hero { align-items: flex-end; }
     .hero-content { align-items: flex-end; padding-bottom: 80px; }
     .hero-text-panel {
